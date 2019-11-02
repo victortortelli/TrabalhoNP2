@@ -1,22 +1,18 @@
 # TrabNP2
-trabalho da np2 de poo e bd 4 semestre 2019/2
+trabalho da np2 de poo 4 semestre 2019/2
 
+---
+update ?? ??/??/???
+
+???????
 ---
 
 ---
+update victor 02/11/2019
 
+criada a pasta com a biblioteca do mysql dentro 
 
-
-
----
-update victor 01/11/19
-
-criada a pasta para a instalção da biblioteca correta "mysql-connector-java-5.1.48" 
-
-criado os getters e setters da classe paciente. Pupo já tinha criado mas não foi commitado
-
-alterada a variável txtCartaoSus para txtCartaoSUS
-
+encapsulados os campos da classe pacientes
 
 ---
 
