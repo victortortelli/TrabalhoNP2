@@ -18,11 +18,12 @@ public class Conexao {
         Connection con = null;
         
         try{
-            Class.forName("com.mysql.jdbc.Drive").newInstance();
+            System.out.println("Conectando ao banco ...");
+            Class.forName("com.mysql.jdbc.Driver").newInstance();//precisa arrumar essa merda            
             String url ="";
             url+="jdbc:mysql://";
             url+=ip;
-            url+="/projeto_java?";
+            url+="/trabalhoNp2?";
             url+="user=";
             url+=login;
             url+="&password=";
@@ -33,6 +34,7 @@ public class Conexao {
             System.out.println("Conexão aberta para " + login);       
             
         }catch(ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e){
+            System.out.println("Falhou!");
             System.out.println(e.getMessage());
         }
         

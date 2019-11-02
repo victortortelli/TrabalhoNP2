@@ -5,6 +5,13 @@
  */
 package GUI;
 
+import Banco.Conexao;
+import Banco.PacienteDAO;
+import Objetos.Paciente;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aluno
@@ -293,6 +300,11 @@ public class CadastroGUI extends javax.swing.JFrame {
         );
 
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnLimparCampos.setText("Limpar Campos");
 
@@ -359,6 +371,25 @@ public class CadastroGUI extends javax.swing.JFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        try{
+            Connection con = Conexao.abrirConexao();
+            Paciente pb = new Paciente();
+            PacienteDAO pd = new PacienteDAO(con);
+            
+            pb.setNome(txtNome.getText());
+            pb.setCartaoSUS(txtCartaoSus.getText());
+            pb.setCpf(txtCPF.getText());
+            
+            pd.insert(pb);
+            Conexao.fecharConexao(con);
+            JOptionPane.showMessageDialog(this,"Paciente cadastrado com sucesso!");
+        }catch(ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e){
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this,"Erro ao cadastrar paciente!");
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
