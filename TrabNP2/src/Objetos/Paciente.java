@@ -10,20 +10,6 @@ import java.util.ArrayList;
  * @author guilherme
  */
 public class Paciente extends Pessoas{
-    
-    private String cartaoSUS;
-    private String endereco;
-    private String bairro;
-    private String numero;
-    private String complemento;
-    private String cidade;
-    private String estado;
-    private String escola;
-    private ArrayList<Consulta> consultas;
-    
-    public void listarConsultas(){
-        //fazer dps
-    }
 
     /**
      * @return the cartaoSUS
@@ -143,11 +129,47 @@ public class Paciente extends Pessoas{
     public ArrayList<Consulta> getConsultas() {
         return consultas;
     }
+    private String cartaoSUS;
+    private String endereco;
+    private String bairro;
+    private String numero;
+    private String complemento;
+    private String cidade;
+    private String estado;
+    private String ddd;
+    private String telefone;
+    private String escola;
+    private ArrayList<Consulta> consultas;
+    
+    public void listarConsultas(){
+        //fazer dps
+    }
 
     /**
-     * @param consultas the consultas to set
+     * @return the ddd
      */
-    public void setConsultas(ArrayList<Consulta> consultas) {
-        this.consultas = consultas;
+    public String getDdd() {
+        return ddd;
+    }
+
+    /**
+     * @param ddd the ddd to set
+     */
+    public void setDdd(String ddd) {
+        this.ddd = ddd;
+    }
+
+    /**
+     * @return the telefone
+     */
+    public String getTelefone() {
+        return telefone;
+    }
+
+    /**
+     * @param telefone the telefone to set
+     */
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }
