@@ -2,9 +2,8 @@
 trabalho da np2 de poo 4 semestre 2019/2
 
 ---
-update ?? ??/??/???
-
-???????
+update guilhpupo 02/11/2019
+terminada a PacienteDAO insert, falta fazer os testes de consistencia em CadastroGUI e fazer o select na PacienteDAO pra retornar um paciente conforme é pedido em ListPacientesGUI
 ---
 
 ---
