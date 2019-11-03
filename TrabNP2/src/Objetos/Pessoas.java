@@ -5,6 +5,7 @@
  */
 package Objetos;
 
+import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -45,8 +46,9 @@ public abstract class Pessoas {
     /**
      * @return the dataNasc
      */
-    public GregorianCalendar getDataNasc() {
-        return dataNasc;
+    public Date getDataNasc() {
+        Date d = Date.valueOf(this.dataNasc.toString());
+        return d;
     }
 
     /**
@@ -75,12 +77,13 @@ public abstract class Pessoas {
     private String rg;
     
     public int calculaIdade(){
-        GregorianCalendar hoje = new GregorianCalendar();
+        GregorianCalendar hoje;
+        hoje = new GregorianCalendar();
         
         int diaHoje = hoje.get(Calendar.DAY_OF_YEAR);
-        int diaAniversario = this.getDataNasc().get(Calendar.DAY_OF_YEAR);
+        int diaAniversario = this.dataNasc.get(Calendar.DAY_OF_YEAR);
         int anoHoje = hoje.get(Calendar.YEAR);
-        int anoNascimento = this.getDataNasc().get(Calendar.YEAR);
+        int anoNascimento = this.dataNasc.get(Calendar.YEAR);
         
         if(diaHoje>diaAniversario){
             //ainda não fez aniversario esse ano
