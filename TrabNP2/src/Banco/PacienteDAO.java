@@ -29,12 +29,23 @@ public class PacienteDAO {
     }
 
     public String insert(Paciente paciente) {
-        String sql = "INSERT INTO paciente(cpf,nome,cartaoSUS) VALUES (?,?,?)";
+        String sql = "INSERT INTO paciente(nome,nascimento,cpf,cartao_sus,rg,rua,bairro,numero,complemento,cidade,estado,ddd,telefone,escola) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
-            ps.setString(1, paciente.getCpf());
-            ps.setString(2, paciente.getNome());
-            ps.setString(3, paciente.getCartaoSUS());
+            ps.setString(1, paciente.getNome());
+            ps.setDate(2, paciente.getDataNasc());
+            ps.setString(3, paciente.getCpf());
+            ps.setString(4, paciente.getCartaoSUS());
+            ps.setString(5, paciente.getRg());
+            ps.setString(6, paciente.getEndereco());
+            ps.setString(7, paciente.getBairro());
+            ps.setString(8, paciente.getNumero());
+            ps.setString(9, paciente.getComplemento());
+            ps.setString(10, paciente.getCidade());
+            ps.setString(11, paciente.getEstado());
+            ps.setString(12, paciente.getDdd());
+            ps.setString(13, paciente.getTelefone());
+            ps.setString(14, paciente.getEscola());
             if (ps.executeUpdate() > 0) {
                 return "Dados inseridos com sucesso! (cpf,nome,cartaoSUS)";
             } else {
