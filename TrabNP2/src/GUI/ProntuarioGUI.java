@@ -16,6 +16,7 @@ public class ProntuarioGUI extends javax.swing.JFrame {
      */
     public ProntuarioGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

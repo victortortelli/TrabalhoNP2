@@ -16,6 +16,7 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
      */
     public ListarConsultaGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

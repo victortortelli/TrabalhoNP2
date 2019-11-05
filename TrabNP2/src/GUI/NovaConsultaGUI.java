@@ -16,6 +16,7 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
      */
     public NovaConsultaGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

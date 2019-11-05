@@ -19,11 +19,11 @@ public class Conexao {
         
         try{
             System.out.println("Conectando ao banco ...");
-            Class.forName("com.mysql.jdbc.Driver").newInstance();//precisa arrumar essa merda            
+            Class.forName("com.mysql.jdbc.Driver").newInstance();         
             String url ="";
             url+="jdbc:mysql://";
             url+=ip;
-            url+="/trabalhoNp2?";
+            url+="/trabalhoNp2?useSSL=false&";
             url+="user=";
             url+=login;
             url+="&password=";
