@@ -7,11 +7,13 @@ adicionadas arquivo .jar pra usar de biblioteca (ta na pasta Banco de Dados)
 adicionadas mascaras na GUI CadastroGUI para cartaoSUS, cpf, telefone e data de nascimento
 feitos alguns testes de consistencia do formulario (ainda faltam alguns)
 colocadas todas as GUI pra iniciar no centro da tela
+
 ---
 
 ---
 update guilhpupo 02/11/2019
 terminada a PacienteDAO insert, falta fazer os testes de consistencia em CadastroGUI e fazer o select na PacienteDAO pra retornar um paciente conforme é pedido em ListPacientesGUI
+
 ---
 
 ---
