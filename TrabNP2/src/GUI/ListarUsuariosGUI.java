@@ -16,6 +16,7 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
      */
     public ListarUsuariosGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
         
     }
 

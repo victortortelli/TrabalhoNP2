@@ -16,6 +16,7 @@ public class SecretariaGUI extends javax.swing.JFrame {
      */
     public SecretariaGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

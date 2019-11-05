@@ -132,7 +132,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="144" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblRua" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTelefone" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -143,10 +143,10 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="txtEscola" pref="251" max="32767" attributes="0"/>
-                      <Component id="txtTelefone" max="32767" attributes="0"/>
                       <Component id="txtCidade" alignment="1" max="32767" attributes="0"/>
                       <Component id="txtNumero" alignment="1" max="32767" attributes="0"/>
                       <Component id="txtRua" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtTelefone" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
@@ -196,15 +196,15 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtEscola" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblEscola" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -244,10 +244,8 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblRua">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Rua:"/>
+            <Property name="text" type="java.lang.String" value="Endere&#xe7;o:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtTelefone">
         </Component>
         <Component class="javax.swing.JTextField" name="txtEscola">
         </Component>
@@ -265,6 +263,11 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cidade:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="txtTelefone">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;javax.swing.text.MaskFormatter mascaraTelefone= new javax.swing.text.MaskFormatter(&quot;(##)9####-####&quot;);&#xa;this.txtTelefone = new javax.swing.JFormattedTextField(mascaraTelefone);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -291,51 +294,50 @@
                       <Component id="lblCPF" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtNome" min="-2" pref="550" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtDataNascimento" alignment="0" pref="200" max="32767" attributes="0"/>
-                              <Component id="txtCartaoSUS" alignment="1" max="32767" attributes="0"/>
-                              <Component id="txtNaturalidade" alignment="0" pref="200" max="32767" attributes="0"/>
-                              <Component id="txtProfissao" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtCPF" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtNome" min="-2" pref="550" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtNaturalidade" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="txtProfissao" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtDataNascimento" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtCpf" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" attributes="0">
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="37" pref="37" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="radioMasculino" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="radioFeminino" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jComboBox3" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jComboBox2" min="-2" pref="230" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="txtRg" min="-2" pref="222" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jComboBox3" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                                  <Component id="lblRG" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtRG" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="267" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
+                      <Component id="txtCartaoSus" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -352,10 +354,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblDataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="radioMasculino" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="radioFeminino" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -372,22 +374,18 @@
                       <Component id="txtProfissao" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                          <Component id="lblRG" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtRG" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblCPF" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCPF" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtRg" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblCartaoSUS" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCartaoSUS" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblCartaoSUS" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCartaoSus" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -398,21 +396,10 @@
             <Property name="text" type="java.lang.String" value="Nome:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCPF">
-        </Component>
         <Component class="javax.swing.JLabel" name="lblCPF">
           <Properties>
             <Property name="text" type="java.lang.String" value="CPF:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtCartaoSUS">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblRG">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="RG:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtRG">
         </Component>
         <Component class="javax.swing.JLabel" name="lblCartaoSUS">
           <Properties>
@@ -426,19 +413,20 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtNome">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDataNascimento">
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sexo:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+        <Component class="javax.swing.JRadioButton" name="radioMasculino">
           <Properties>
             <Property name="text" type="java.lang.String" value="Masculino"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="this.radioMasculino.setSelected(true);&#xa;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+        <Component class="javax.swing.JRadioButton" name="radioFeminino">
           <Properties>
             <Property name="text" type="java.lang.String" value="Feminino"/>
           </Properties>
@@ -501,6 +489,28 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="txtCartaoSus">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;javax.swing.text.MaskFormatter mascaraCartaoSus= new javax.swing.text.MaskFormatter(&quot;### #### #### ####&quot;);&#xa;this.txtCartaoSus = new javax.swing.JFormattedTextField(mascaraCartaoSus);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="txtDataNascimento">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xa;this.txtDataNascimento = new javax.swing.JFormattedTextField(mascaraData);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="txtCpf">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;javax.swing.text.MaskFormatter mascaraCpf= new javax.swing.text.MaskFormatter(&quot;###.###.###-##&quot;);&#xa;this.txtCpf = new javax.swing.JFormattedTextField(mascaraCpf);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="RG:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtRg">
         </Component>
       </SubComponents>
     </Container>
