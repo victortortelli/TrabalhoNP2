@@ -24,11 +24,33 @@ public class CadastroGUI extends javax.swing.JFrame {
     
     
     
-    
+    private void limparCampos(){
+        String empty="";
+        
+        this.txtBairro.setText(empty);
+        this.txtCartaoSus.setText(empty);
+        this.txtCidade.setText(empty);
+        this.txtComplemento.setText(empty);
+        this.txtCpf.setText(empty);
+        this.txtDataNascimento.setText(empty);
+        this.txtEscola.setText(empty);
+        this.txtEstado.setText(empty);
+        this.txtNaturalidade.setText(empty);
+        this.txtNome.setText(empty);
+        this.txtNumero.setText(empty);
+        this.txtProfissao.setText(empty);
+        this.txtRg.setText(empty);
+        this.txtRua.setText(empty);
+        this.txtTelefone.setText(empty);
+    }
     public CadastroGUI() {
         
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        this.limparCampos();
+        
+        
     }
 
     /**
@@ -334,6 +356,11 @@ public class CadastroGUI extends javax.swing.JFrame {
         });
 
         btnLimparCampos.setText("Limpar Campos");
+        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparCamposActionPerformed(evt);
+            }
+        });
 
         btnVoltar.setText("Voltar");
         btnVoltar.setMinimumSize(new java.awt.Dimension(105, 23));
@@ -492,7 +519,7 @@ public class CadastroGUI extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this,"Erro " + dadosVal + ": CPF é inválido");
                     break;
                 case 5:
-                    JOptionPane.showMessageDialog(this,"Erro " + dadosVal + ": RG é inválido");
+                    JOptionPane.showMessageDialog(this,"Erro " + dadosVal + ": Cartão do SUS é inválido");
                     break;
             }
             
@@ -500,6 +527,12 @@ public class CadastroGUI extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
+        // TODO add your handling code here:
+        this.limparCampos();
+        
+    }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     /**
      * @param args the command line arguments
