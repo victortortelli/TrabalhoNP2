@@ -2,6 +2,19 @@
 trabalho da np2 de poo 4 semestre 2019/2
 
 
+
+update victortortelli 11/11/19
+---
+Adicionada combobox para o campo estado na tela de cadastro;
+Adicionado o função limpar combobox dentro do método Limpar Campos;
+Criada FarmaciaGUI;
+Mudadas todas as tabelas para public e static, para que a biblioteca de comunicação
+com o Mysql funcione;
+Criado ProntuarioGUI;
+
+
+
+
 update guilhpupo 04/11/19
 ---
 adicionadas arquivo .jar pra usar de biblioteca (ta na pasta Banco de Dados)

@@ -38,7 +38,7 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
         btnPesquisar = new javax.swing.JButton();
         panelResultados = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableResultados = new javax.swing.JTable();
+        tblResultados = new javax.swing.JTable();
         btnCancelarConsulta = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         btnAlterarConsulta = new javax.swing.JButton();
@@ -99,7 +99,7 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
 
         panelResultados.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultados"));
 
-        tableResultados.setModel(new javax.swing.table.DefaultTableModel(
+        tblResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -129,7 +129,7 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tableResultados);
+        jScrollPane1.setViewportView(tblResultados);
 
         javax.swing.GroupLayout panelResultadosLayout = new javax.swing.GroupLayout(panelResultados);
         panelResultados.setLayout(panelResultadosLayout);
@@ -259,7 +259,7 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblOu;
     private javax.swing.JPanel panelBuscarConsultas;
     private javax.swing.JPanel panelResultados;
-    private javax.swing.JTable tableResultados;
+    public static javax.swing.JTable tblResultados;
     private javax.swing.JTextField txtDataConsulta;
     private javax.swing.JTextField txtNumeroConsulta;
     // End of variables declaration//GEN-END:variables
