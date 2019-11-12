@@ -16,6 +16,7 @@ public class MedicoGUI extends javax.swing.JFrame {
      */
     public MedicoGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
