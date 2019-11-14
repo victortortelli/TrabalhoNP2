@@ -36,16 +36,17 @@
                           <Component id="lblCPF" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblErro" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="btnLogin" min="-2" pref="75" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                                  <Component id="btnSair" min="-2" pref="75" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="txtSenha" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtCPF" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btnLogin" min="-2" pref="75" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                              <Component id="btnSair" min="-2" pref="75" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="txtSenha" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtCPF" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              <Component id="lblErro" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -74,9 +75,9 @@
                   <Component id="btnLogin" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSair" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="lblErro" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <Component id="lblErro" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
