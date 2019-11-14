@@ -458,8 +458,8 @@ public class CadastroGUI extends javax.swing.JFrame {
         }
         
         //VERIFICANDO A QUANTIDADE DE DIGITOS NO TXT CPF
-        if(txtCpf.getText().length()!=11){
-            return 4;
+        if(txtCpf.getText().length()!=14){
+            return 4; 
         }
         
         //VERIFICANDO SE HÁ LETRAS NO TXT DO CARTAO DO SUS
@@ -470,7 +470,7 @@ public class CadastroGUI extends javax.swing.JFrame {
         }
         
         //VERIFICANDO A QUANTIDADE DE DIGITOS NO TXT CARTAO DO SUS
-        if(txtCartaoSus.getText().length()!=15){
+        if(txtCartaoSus.getText().length()!=18){
             return 5;
         }
         
