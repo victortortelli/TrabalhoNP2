@@ -1,21 +1,7 @@
 # TrabNP2
 trabalho da np2 de poo 4 semestre 2019/2
 
-update guilhpupo 13/11/19
----
-Agora o login utiliza users do banco para acessar:
-codigo sql para criacao dos users:
-****
-create user pupo@localhost identified by "thegreat";
-grant select,insert,update,delete on trabalhoNp2.* to pupo@localhost;
 
-create user ed@localhost identified by "willy";
-grant select,insert,update,delete on trabalhoNp2.* to ed@localhost;
-
-create user vitao@localhost identified by "victor";
-grant select on trabalhoNp2.pacientes to vitao@localhost;
-grant select on trabalhoNp2.diagnosticos to vitao@localhost;
-****
 
 update victortortelli 11/11/19
 ---
