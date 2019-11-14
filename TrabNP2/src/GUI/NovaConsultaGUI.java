@@ -54,6 +54,11 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
         lblCartaoSUS.setText("Nº Cartão SUS: ");
 
         jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,15 +87,23 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
 
         jLabel1.setText("Nome:");
 
+        jTextField1.setEditable(false);
+
         lblRG.setText("RG:");
 
+        txtRG.setEditable(false);
+
         lblDataNascimento.setText("Data de Nascimento: ");
+
+        txtDataNascimento.setEditable(false);
 
         jLabel3.setText("Urgência:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vermelha (Prioridade 0)", "Amarela (Prioridade 1)", "Verde (Prioridade 2)" }));
 
         lblNumeroConsulta.setText("Nº da Consulta:");
+
+        txtNumeroConsulta.setEditable(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -201,6 +214,10 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
