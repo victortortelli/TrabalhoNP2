@@ -21,12 +21,9 @@ public class CadastroGUI extends javax.swing.JFrame {
     /**
      * Creates new form Tela_Secretaria
      */
-    
-    
-    
-    private void limparCampos(){
-        String empty="";
-        
+    private void limparCampos() {
+        String empty = "";
+
         this.txtBairro.setText(empty);
         this.txtCartaoSus.setText(empty);
         this.txtCidade.setText(empty);
@@ -45,14 +42,14 @@ public class CadastroGUI extends javax.swing.JFrame {
         this.txtRua.setText(empty);
         this.txtTelefone.setText(empty);
     }
+
     public CadastroGUI() {
-        
+
         initComponents();
         this.setLocationRelativeTo(null);
-        
+
         this.limparCampos();
-        
-        
+
     }
 
     /**
@@ -427,67 +424,72 @@ public class CadastroGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private int dadosValidados(){
-        
+    private int dadosValidados() {
+
         //VERIFICANDO SE HÁ NUMEROS NO TXT DO NOME
-        for(char c : txtNome.getText().toCharArray()){
-            if(Character.isDigit(c)){
+        for (char c : txtNome.getText().toCharArray()) {
+            if (Character.isDigit(c)) {
                 return 1;
             }
-        }       
-        
+        }
+
         //VERIFICANDO SE HÁ NUMEROS NO TXT DO NATURALIDADE
-        for(char c : txtNaturalidade.getText().toCharArray()){
-            if(Character.isDigit(c)){
+        for (char c : txtNaturalidade.getText().toCharArray()) {
+            if (Character.isDigit(c)) {
                 return 2;
             }
         }
-        
+
         //VERIFICANDO SE HÁ NUMEROS NO TXT DO PROFISSÃO
-        for(char c : txtProfissao.getText().toCharArray()){
-            if(Character.isDigit(c)){
+        for (char c : txtProfissao.getText().toCharArray()) {
+            if (Character.isDigit(c)) {
                 return 3;
             }
         }
-        
+
         //VERIFICANDO SE HÁ LETRAS NO TXT DO CPF
-        for(char c : txtCpf.getText().toCharArray()){
-            if(Character.isLetter(c)){
+        for (char c : txtCpf.getText().toCharArray()) {
+            if (Character.isLetter(c)) {
                 return 4;
             }
         }
-        
+
         //VERIFICANDO A QUANTIDADE DE DIGITOS NO TXT CPF
-        if(txtCpf.getText().length()!=14){
-            return 4; 
+        if (txtCpf.getText().length() != 14) {
+            return 4;
         }
-        
+
         //VERIFICANDO SE HÁ LETRAS NO TXT DO CARTAO DO SUS
-        for(char c : txtCartaoSus.getText().toCharArray()){
-            if(Character.isLetter(c)){
+        for (char c : txtCartaoSus.getText().toCharArray()) {
+            if (Character.isLetter(c)) {
                 return 5;
             }
         }
-        
+
         //VERIFICANDO A QUANTIDADE DE DIGITOS NO TXT CARTAO DO SUS
-        if(txtCartaoSus.getText().length()!=18){
+        if (txtCartaoSus.getText().length() != 18) {
             return 5;
         }
-        
-        
-        
+
         return 0;
     }
-    
-    
+
+
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        int dadosVal=dadosValidados();
-        
-        if(dadosVal==0){
-                try{
+        int dadosVal = dadosValidados();
+
+        if (dadosVal == 0) {
+            try {
                 Connection con = Conexao.abrirConexao();
                 Paciente pb = new Paciente();
                 PacienteDAO pd = new PacienteDAO(con);
+
+                // Sintaxe para formatação de data de nascimento de acordo com o banco
+                String text = txtDataNascimento.getText();
+                java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                java.time.LocalDate textFieldAsDate = java.time.LocalDate.parse(text, formatter);
+                java.sql.Date sqlDate = java.sql.Date.valueOf(textFieldAsDate);
+                //Fim
 
                 pb.setNome(txtNome.getText());
                 pb.setCartaoSUS(txtCartaoSus.getText());
@@ -495,44 +497,44 @@ public class CadastroGUI extends javax.swing.JFrame {
 
                 pd.insert(pb);
                 Conexao.fecharConexao(con);
-                int continua=JOptionPane.showConfirmDialog(this,"Paciente cadastrado com sucesso!");
+                int continua = JOptionPane.showConfirmDialog(this, "Paciente cadastrado com sucesso!");
 
-                if(continua==1){
+                if (continua == 1) {
                     this.dispose();
                     CadastroGUI novaTela = new CadastroGUI();
                 }
-            }catch(ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e){
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
                 System.out.println(e.getMessage());
-                JOptionPane.showMessageDialog(this,"Erro ao cadastrar paciente!");
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar paciente!");
             }
-        }else{
-            switch(dadosVal){
+        } else {
+            switch (dadosVal) {
                 case 1:
-                    JOptionPane.showMessageDialog(this,"Erro " + dadosVal + ": Nome é inválido");
+                    JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": Nome é inválido");
                     break;
                 case 2:
-                    JOptionPane.showMessageDialog(this,"Erro " + dadosVal + ": Naturalidade é inválida");
+                    JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": Naturalidade é inválida");
                     break;
                 case 3:
-                    JOptionPane.showMessageDialog(this,"Erro " + dadosVal + ": Profissão é inválida");
+                    JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": Profissão é inválida");
                     break;
                 case 4:
-                    JOptionPane.showMessageDialog(this,"Erro " + dadosVal + ": CPF é inválido");
+                    JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": CPF é inválido");
                     break;
                 case 5:
-                    JOptionPane.showMessageDialog(this,"Erro " + dadosVal + ": Cartão do SUS é inválido");
+                    JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": Cartão do SUS é inválido");
                     break;
             }
-            
+
         }
-        
-        
+
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
         // TODO add your handling code here:
         this.limparCampos();
-        
+
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     /**
@@ -570,8 +572,7 @@ public class CadastroGUI extends javax.swing.JFrame {
             new CadastroGUI().setVisible(true);
         });
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
