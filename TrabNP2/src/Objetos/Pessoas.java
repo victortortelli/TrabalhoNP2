@@ -75,6 +75,7 @@ public abstract class Pessoas {
     private String nome;
     private GregorianCalendar dataNasc;
     private String rg;
+    private Date DataNascMysql;
     
     public int calculaIdade(){
         GregorianCalendar hoje;
@@ -93,6 +94,15 @@ public abstract class Pessoas {
         
         
         return anoHoje - anoNascimento;
+    }
+    
+    public Date getDataNascMysql() {
+        return DataNascMysql;
+    }
+
+
+    public void setDataNascMysql(Date DataNascMysql) {
+        this.DataNascMysql = DataNascMysql;
     }
     
 }
