@@ -10,9 +10,9 @@ import java.sql.SQLException;
  */
 public class Conexao {
     // -- MUDAR AQUI SE NECESSARIO
-    public static final String ip = "localhost";
-    public static final String login = "root";
-    public static final String senha = "root";
+    public static final String ip = "127.0.0.1";
+    public static  String login = "";
+    public static  String senha = "";
     
     public static Connection abrirConexao() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
         Connection con = null;
@@ -23,7 +23,9 @@ public class Conexao {
             String url ="";
             url+="jdbc:mysql://";
             url+=ip;
-            url+="/trabalhoNp2?useSSL=false&";
+            url+="/trabalhoNp2?";
+            url+="allowPublicKeyRetrieval=true&";
+            url+="useSSL=false&";
             url+="user=";
             url+=login;
             url+="&password=";
