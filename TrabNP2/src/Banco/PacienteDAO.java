@@ -17,16 +17,12 @@ import java.util.List;
  *
  * @author guilherme
  */
-public class PacienteDAO {
-        private Connection con;
+public class PacienteDAO extends DAO{
 
     public PacienteDAO(Connection con) {
-        this.con = con;
+        super(con);
     }
-
-    public Connection getCon() {
-        return this.con;
-    }
+   
 
     public String insert(Paciente paciente) {
         String sql = "INSERT INTO paciente(nome,nascimento,cpf,cartao_sus,rg,rua,bairro,numero,complemento,cidade,estado,ddd,telefone,escola) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";

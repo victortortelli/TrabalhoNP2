@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import Banco.Conexao;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 /**
  *
  * @author aluno
@@ -17,6 +21,7 @@ public class LoginGUI extends javax.swing.JFrame {
     public LoginGUI() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.lblErro.setVisible(false);
     }
 
     /**
@@ -35,6 +40,7 @@ public class LoginGUI extends javax.swing.JFrame {
         lblCPF = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
         lblLogin = new javax.swing.JLabel();
+        lblErro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +65,9 @@ public class LoginGUI extends javax.swing.JFrame {
         lblLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblLogin.setText("LOGIN");
 
+        lblErro.setForeground(new java.awt.Color(255, 0, 0));
+        lblErro.setText("CPF e/ou senha inválido(s)!");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,21 +75,23 @@ public class LoginGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(lblLogin))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblSenha)
                             .addComponent(lblCPF))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(61, 61, 61)
-                                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtSenha)
-                            .addComponent(txtCPF)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(lblLogin)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblErro)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(61, 61, 61)
+                                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtSenha)
+                                .addComponent(txtCPF)))))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,25 +111,57 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
                     .addComponent(btnSair))
-                .addGap(43, 43, 43))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblErro)
+                .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        switch(txtCPF.getText()){
-            case "atendente":
-                this.setVisible(false);
+        
+        try{
+            String login=txtCPF.getText();
+            String senha=txtSenha.getText();
+            
+            
+            Conexao.login=login;
+            Conexao.senha=senha;
+            
+            
+            Connection con=Conexao.abrirConexao();
+            
+           if(con==null){
+               this.lblErro.setVisible(true);
+               return;
+           }
+           
+           Conexao.fecharConexao(con);
+           
+            
+        
+        switch(login){
+            case "pupo":
+                this.dispose();
                 SecretariaGUI telaSecretaria = new SecretariaGUI();
                 telaSecretaria.setVisible(true);
                 break;
-            case "medico":
-                this.setVisible(false);
+            case "ed":
+                this.dispose();
                 MedicoGUI telaMedico = new MedicoGUI();
                 telaMedico.setVisible(true);
                 break;
+            case "vitao":
+                this.dispose();
+                FarmaciaGUI telaFarmacia = new FarmaciaGUI();
+                telaFarmacia.setVisible(true);
+                break;
         }
+        }catch(ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e){
+            
+        }
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -165,6 +208,7 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel lblCPF;
+    private javax.swing.JLabel lblErro;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JTextField txtCPF;
