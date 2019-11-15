@@ -71,25 +71,23 @@
               <EmptySpace min="-2" pref="264" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panelEndereco" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
-                      <Component id="btnVoltar" min="-2" pref="140" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="btnLimparCampos" min="-2" pref="129" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Component id="btnCadastrar" min="-2" pref="130" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panelDadosPessoais" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+              <Component id="btnVoltar" min="-2" pref="140" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <Component id="btnLimparCampos" min="-2" pref="129" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+              <Component id="btnCadastrar" min="-2" pref="130" max="-2" attributes="0"/>
+              <EmptySpace pref="131" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="panelEndereco" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="panelDadosPessoais" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -207,14 +205,14 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lblComplemento">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Complemento:"/>
+            <Property name="text" type="java.lang.String" value="* Complemento:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtComplemento">
         </Component>
         <Component class="javax.swing.JLabel" name="lblBairro">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Bairro:"/>
+            <Property name="text" type="java.lang.String" value="* Bairro:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtBairro">
@@ -223,7 +221,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblEstado">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Estado:"/>
+            <Property name="text" type="java.lang.String" value="* Estado:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumero">
@@ -232,19 +230,19 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblNumero">
           <Properties>
-            <Property name="text" type="java.lang.String" value="N&#xfa;mero:"/>
+            <Property name="text" type="java.lang.String" value="* N&#xfa;mero:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblRua">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Endere&#xe7;o:"/>
+            <Property name="text" type="java.lang.String" value="* Endere&#xe7;o:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEscola">
         </Component>
         <Component class="javax.swing.JLabel" name="lblTelefone">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Telefone:"/>
+            <Property name="text" type="java.lang.String" value="* Telefone:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblEscola">
@@ -254,10 +252,13 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblCidade">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cidade:"/>
+            <Property name="text" type="java.lang.String" value="* Cidade:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtTelefone">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtTelefoneMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;javax.swing.text.MaskFormatter mascaraTelefone= new javax.swing.text.MaskFormatter(&quot;(##)9####-####&quot;);&#xa;this.txtTelefone = new javax.swing.JFormattedTextField(mascaraTelefone);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
           </AuxValues>
@@ -325,52 +326,58 @@
                       <Component id="lblCPF" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtNome" min="-2" pref="550" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtNaturalidade" alignment="0" pref="200" max="32767" attributes="0"/>
-                                  <Component id="txtProfissao" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtDataNascimento" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtCpf" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtNaturalidade" alignment="0" pref="200" max="32767" attributes="0"/>
+                              <Component id="txtProfissao" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtDataNascimento" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtCpf" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="37" pref="37" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="radioMasculino" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="radioFeminino" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="cmbDeficiencia" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cmbRaca" min="-2" pref="230" max="-2" attributes="0"/>
-                                          <Component id="txtRg" min="-2" pref="222" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
+                          <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="txtRg" min="-2" pref="201" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                          <Component id="radioMasculino" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="radioFeminino" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="cmbDeficiencia" alignment="0" min="-2" pref="199" max="-2" attributes="0"/>
+                                      <Component id="cmbRaca" alignment="0" min="-2" pref="199" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <Component id="txtCartaoSus" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="txtCartaoSus" min="-2" pref="200" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="txtNome" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -424,35 +431,38 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lblNome">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nome:"/>
+            <Property name="text" type="java.lang.String" value="* Nome:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCPF">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CPF:"/>
+            <Property name="text" type="java.lang.String" value="* CPF:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCartaoSUS">
           <Properties>
-            <Property name="text" type="java.lang.String" value="N&#xba; Cart&#xe3;o SUS:"/>
+            <Property name="text" type="java.lang.String" value="* N&#xba; Cart&#xe3;o SUS:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblDataNascimento">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Data de Nascimento:"/>
+            <Property name="text" type="java.lang.String" value="* Data de Nascimento:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNome">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sexo:"/>
+            <Property name="text" type="java.lang.String" value="* Sexo:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="radioMasculino">
           <Properties>
             <Property name="text" type="java.lang.String" value="Masculino"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="radioMasculinoMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="this.radioMasculino.setSelected(true);&#xa;"/>
           </AuxValues>
@@ -461,24 +471,28 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Feminino"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="radioFemininoMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioFemininoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblNaturalidade">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Naturalidade:"/>
+            <Property name="text" type="java.lang.String" value="* Naturalidade:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNaturalidade">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Profiss&#xe3;o:"/>
+            <Property name="text" type="java.lang.String" value="* Profiss&#xe3;o:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtProfissao">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ra&#xe7;a/Cor:"/>
+            <Property name="text" type="java.lang.String" value="* Ra&#xe7;a/Cor:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbRaca">
@@ -501,7 +515,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Defici&#xea;ncia:"/>
+            <Property name="text" type="java.lang.String" value="* Defici&#xea;ncia:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbDeficiencia">
@@ -522,23 +536,32 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtCartaoSus">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCartaoSusMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;javax.swing.text.MaskFormatter mascaraCartaoSus= new javax.swing.text.MaskFormatter(&quot;### #### #### ####&quot;);&#xa;this.txtCartaoSus = new javax.swing.JFormattedTextField(mascaraCartaoSus);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtDataNascimento">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtDataNascimentoMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xa;this.txtDataNascimento = new javax.swing.JFormattedTextField(mascaraData);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtCpf">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCpfMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;javax.swing.text.MaskFormatter mascaraCpf= new javax.swing.text.MaskFormatter(&quot;###.###.###-##&quot;);&#xa;this.txtCpf = new javax.swing.JFormattedTextField(mascaraCpf);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="RG:"/>
+            <Property name="text" type="java.lang.String" value="* RG/CN:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtRg">
