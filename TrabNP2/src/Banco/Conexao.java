@@ -10,9 +10,9 @@ import java.sql.SQLException;
  */
 public class Conexao {
     // -- MUDAR AQUI SE NECESSARIO
-    public static final String ip = "127.0.0.1";
-    public static  String login = "";
-    public static  String senha = "";
+    public static final String ip = "localhost";
+    public static  String login = "root";
+    public static  String senha = "root";
     
     public static Connection abrirConexao() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
         Connection con = null;

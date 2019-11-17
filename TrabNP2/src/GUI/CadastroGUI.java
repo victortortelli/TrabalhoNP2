@@ -146,21 +146,27 @@ public class CadastroGUI extends javax.swing.JFrame {
 
         panelEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
 
-        lblComplemento.setText("Complemento:");
+        lblComplemento.setText("* Complemento:");
 
-        lblBairro.setText("Bairro:");
+        lblBairro.setText("* Bairro:");
 
-        lblEstado.setText("Estado:");
+        lblEstado.setText("* Estado:");
 
-        lblNumero.setText("Número:");
+        lblNumero.setText("* Número:");
 
-        lblRua.setText("Endereço:");
+        lblRua.setText("* Endereço:");
 
-        lblTelefone.setText("Telefone:");
+        lblTelefone.setText("* Telefone:");
 
         lblEscola.setText("Escola:");
 
-        lblCidade.setText("Cidade:");
+        lblCidade.setText("* Cidade:");
+
+        txtTelefone.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTelefoneMouseClicked(evt);
+            }
+        });
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 
@@ -233,33 +239,66 @@ public class CadastroGUI extends javax.swing.JFrame {
 
         panelDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
 
-        lblNome.setText("Nome:");
+        lblNome.setText("* Nome:");
 
-        lblCPF.setText("CPF:");
+        lblCPF.setText("* CPF:");
 
-        lblCartaoSUS.setText("Nº Cartão SUS:");
+        lblCartaoSUS.setText("* Nº Cartão SUS:");
 
-        lblDataNascimento.setText("Data de Nascimento:");
+        lblDataNascimento.setText("* Data de Nascimento:");
 
-        jLabel1.setText("Sexo:");
+        jLabel1.setText("* Sexo:");
 
         radioMasculino.setText("Masculino");
+        radioMasculino.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                radioMasculinoMouseClicked(evt);
+            }
+        });
 
         radioFeminino.setText("Feminino");
+        radioFeminino.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                radioFemininoMouseClicked(evt);
+            }
+        });
+        radioFeminino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioFemininoActionPerformed(evt);
+            }
+        });
 
-        lblNaturalidade.setText("Naturalidade:");
+        lblNaturalidade.setText("* Naturalidade:");
 
-        jLabel2.setText("Profissão:");
+        jLabel2.setText("* Profissão:");
 
-        jLabel3.setText("Raça/Cor:");
+        jLabel3.setText("* Raça/Cor:");
 
         cmbRaca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nenhum", "Branca", "Parda", "Negra", "Amarela", "Indígena", " " }));
 
-        jLabel4.setText("Deficiência:");
+        jLabel4.setText("* Deficiência:");
 
         cmbDeficiencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nenhuma", "Visual", "Auditiva", "Mental", "Física", "Múltipla" }));
 
-        jLabel6.setText("RG:");
+        txtCartaoSus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCartaoSusMouseClicked(evt);
+            }
+        });
+
+        txtDataNascimento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDataNascimentoMouseClicked(evt);
+            }
+        });
+
+        txtCpf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCpfMouseClicked(evt);
+            }
+        });
+
+        jLabel6.setText("* RG/CN:");
 
         javax.swing.GroupLayout panelDadosPessoaisLayout = new javax.swing.GroupLayout(panelDadosPessoais);
         panelDadosPessoais.setLayout(panelDadosPessoaisLayout);
@@ -275,40 +314,44 @@ public class CadastroGUI extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblCPF, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                            .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtNaturalidade, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addComponent(txtProfissao)
-                                .addComponent(txtDataNascimento)
-                                .addComponent(txtCpf))
-                            .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                                    .addGap(55, 55, 55)
-                                    .addComponent(jLabel1))
-                                .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel6))))
-                            .addGap(37, 37, 37)
-                            .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                                    .addComponent(radioMasculino)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(radioFeminino)
-                                    .addGap(41, 41, 41))
-                                .addComponent(cmbDeficiencia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                                    .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cmbRaca, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(0, 0, Short.MAX_VALUE)))))
-                    .addComponent(txtCartaoSus, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
+                        .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNaturalidade, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(txtProfissao)
+                            .addComponent(txtDataNascimento)
+                            .addComponent(txtCpf))
+                        .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(jLabel1))
+                            .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel6))))
+                        .addGap(29, 29, 29)
+                        .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
+                                .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosPessoaisLayout.createSequentialGroup()
+                                .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(radioMasculino)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(radioFeminino))
+                                    .addComponent(cmbDeficiencia, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbRaca, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(45, 45, 45))))
+                    .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
+                        .addComponent(txtCartaoSus, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
+                        .addComponent(txtNome)
+                        .addGap(51, 51, 51))))
         );
         panelDadosPessoaisLayout.setVerticalGroup(
             panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,21 +427,21 @@ public class CadastroGUI extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(264, 264, 264))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(btnLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelDadosPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(125, 125, 125)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(btnLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(131, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -474,6 +517,16 @@ public class CadastroGUI extends javax.swing.JFrame {
         return 0;
     }
 
+    private String SelecionaSexo() {
+        String sexo = "";
+        if (radioMasculino.isSelected()) {
+            sexo = radioMasculino.getText();
+        } else if (radioFeminino.isSelected()) {
+            sexo = radioFeminino.getText();
+        }
+        return sexo;
+    }
+
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         int dadosVal = dadosValidados();
@@ -491,9 +544,37 @@ public class CadastroGUI extends javax.swing.JFrame {
                 java.sql.Date sqlDate = java.sql.Date.valueOf(textFieldAsDate);
                 //Fim
 
+                //Cria uma string com a opção marcada dentro da combobox
+                String uf = (String) cmbEstado.getSelectedItem();
+                String deficiencia = (String) cmbDeficiencia.getSelectedItem();
+                String cor = (String) cmbRaca.getSelectedItem();
+                //fim
+
                 pb.setNome(txtNome.getText());
                 pb.setCartaoSUS(txtCartaoSus.getText());
                 pb.setCpf(txtCpf.getText());
+                pb.setBairro(txtBairro.getText());
+                pb.setCidade(txtCidade.getText());
+                pb.setComplemento(txtComplemento.getText());
+                pb.setEndereco(txtRua.getText());
+                pb.setDataNascMysql(sqlDate);
+                pb.setRg(txtRg.getText());
+                pb.setNumero(txtNumero.getText());
+                pb.setTelefone(txtTelefone.getText());
+                pb.setEscola(txtEscola.getText());
+
+                //Criando uma string com apenas o DDD e setando no banco
+                String ddd = "";
+                ddd = pb.getTelefone().substring(1, 3);
+                pb.setDdd(ddd);
+                //FIM
+
+                // A partir daqui ainda não está sendo enviado ao banco
+                pb.setEstado(uf);
+                pb.setDificiencia(deficiencia);
+                pb.setCor(cor);
+                pb.setSexo(SelecionaSexo());
+                //FIM
 
                 pd.insert(pb);
                 Conexao.fecharConexao(con);
@@ -536,6 +617,34 @@ public class CadastroGUI extends javax.swing.JFrame {
         this.limparCampos();
 
     }//GEN-LAST:event_btnLimparCamposActionPerformed
+
+    private void txtTelefoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTelefoneMouseClicked
+        txtTelefone.setCaretPosition(1);
+    }//GEN-LAST:event_txtTelefoneMouseClicked
+
+    private void txtCpfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCpfMouseClicked
+        txtCpf.setCaretPosition(0);
+    }//GEN-LAST:event_txtCpfMouseClicked
+
+    private void txtDataNascimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDataNascimentoMouseClicked
+        txtDataNascimento.setCaretPosition(0);
+    }//GEN-LAST:event_txtDataNascimentoMouseClicked
+
+    private void txtCartaoSusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCartaoSusMouseClicked
+        txtCartaoSus.setCaretPosition(0);
+    }//GEN-LAST:event_txtCartaoSusMouseClicked
+
+    private void radioFemininoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioFemininoMouseClicked
+        radioMasculino.setSelected(false);
+    }//GEN-LAST:event_radioFemininoMouseClicked
+
+    private void radioMasculinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioMasculinoMouseClicked
+        radioFeminino.setSelected(false);
+    }//GEN-LAST:event_radioMasculinoMouseClicked
+
+    private void radioFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFemininoActionPerformed
+
+    }//GEN-LAST:event_radioFemininoActionPerformed
 
     /**
      * @param args the command line arguments

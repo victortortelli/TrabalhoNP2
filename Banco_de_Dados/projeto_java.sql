@@ -33,7 +33,8 @@ use trabalhoNp2;
 CREATE TABLE `consulta` (
   `id` int(11) NOT NULL,
   `crm_medico` varchar(16) NOT NULL,
-  `data_consulta` datetime NOT NULL,
+  `data_consulta` date NOT NULL,
+  `hora_consulta` time NOT NULL,
   `aberta` tinyint(4) NOT NULL DEFAULT 0,
   `diagnostico` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -97,6 +98,8 @@ CREATE TABLE `pacientes` (
   `ddd` varchar(6) NOT NULL,
   `telefone` varchar(20) NOT NULL,
   `escola` varchar(140) DEFAULT NULL
+
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -216,3 +219,31 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+insert into pacientes values (3,
+'Victor',
+'1996-09-02',
+'374.512.321-79',
+'123 1298 9934 1234',
+'10832333',
+'Nicanor Antonio Conti',
+'Nova Lindoia',
+'11',
+'N/A',
+'Águas de Lindóia',
+'SP',
+'19',
+'38242830',
+'IESI');
+
+
+
+select * from pacientes;
+
+-- drop database trabalhonp2;
+
+
+
+
+

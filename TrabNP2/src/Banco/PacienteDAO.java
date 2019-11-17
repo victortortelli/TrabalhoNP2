@@ -5,20 +5,21 @@
  */
 package Banco;
 
+import GUI.ListarUsuariosGUI;
 import Objetos.Paciente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
  * @author guilherme
  */
 public class PacienteDAO {
-        private Connection con;
+
+    private Connection con;
 
     public PacienteDAO(Connection con) {
         this.con = con;
@@ -29,11 +30,11 @@ public class PacienteDAO {
     }
 
     public String insert(Paciente paciente) {
-        String sql = "INSERT INTO paciente(nome,nascimento,cpf,cartao_sus,rg,rua,bairro,numero,complemento,cidade,estado,ddd,telefone,escola) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO pacientes(nome,nascimento,cpf,cartao_sus,rg,rua,bairro,numero,complemento,cidade,estado,ddd,telefone,escola) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
             ps.setString(1, paciente.getNome());
-            ps.setDate(2, paciente.getDataNasc());
+            ps.setDate(2, paciente.getDataNascMysql());
             ps.setString(3, paciente.getCpf());
             ps.setString(4, paciente.getCartaoSUS());
             ps.setString(5, paciente.getRg());
@@ -46,6 +47,7 @@ public class PacienteDAO {
             ps.setString(12, paciente.getDdd());
             ps.setString(13, paciente.getTelefone());
             ps.setString(14, paciente.getEscola());
+
             if (ps.executeUpdate() > 0) {
                 return "Dados inseridos com sucesso! (cpf,nome,cartaoSUS)";
             } else {
@@ -90,31 +92,35 @@ public class PacienteDAO {
         }
     }
 
-    public List<Paciente> selectAll() {
-        List<Paciente> collection = new ArrayList<Paciente>();
-        String sql = "SELECT * FROM paciente;";
+    public String selectAll(Paciente pp) {
 
-        try {
-            PreparedStatement ps = this.getCon().prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        if (ListarUsuariosGUI.txtCartaoSUS.getText().isBlank() == true) {
 
-            if (rs != null) {
-                while (rs.next()) {
-                    Paciente pb = new Paciente();
-                    pb.setCartaoSUS(rs.getString(1));
-                    pb.setCpf(rs.getString(2));
-                    pb.setNome(rs.getString(3));
-                    collection.add(pb);
-                }
-                return collection;
-            }else{
+            String sql = "SELECT id, nome, nascimento, cpf, cartao_sus, rg FROM pacientes;";
+            try {
+                PreparedStatement ps = this.getCon().prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                ListarUsuariosGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
                 return null;
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
 
-        
+        } else {
+            String sql = "SELECT id, nome, nascimento, cpf, rg FROM pacientes WHERE cartao_sus = ?;";
+            try {
+                PreparedStatement ps = this.getCon().prepareStatement(sql);
+                ps.setString(1, pp.getCartaoSUS());
+                ResultSet rs = ps.executeQuery();
+                ListarUsuariosGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return null;
+            }
+        }
+        return null;
     }
+
 }
