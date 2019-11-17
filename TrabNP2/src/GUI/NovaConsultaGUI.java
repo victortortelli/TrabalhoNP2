@@ -5,6 +5,16 @@
  */
 package GUI;
 
+import Banco.Conexao;
+import java.sql.Connection;
+import Banco.ConsultaDAO;
+import Objetos.Consulta;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import Objetos.Paciente;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author torte
@@ -31,18 +41,16 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblCartaoSUS = new javax.swing.JLabel();
         txtCartaoSUS = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         lblRG = new javax.swing.JLabel();
         txtRG = new javax.swing.JTextField();
         lblDataNascimento = new javax.swing.JLabel();
         txtDataNascimento = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        lblNumeroConsulta = new javax.swing.JLabel();
-        txtNumeroConsulta = new javax.swing.JTextField();
+        cmbSituacao = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         btnConfirmarConsulta = new javax.swing.JButton();
@@ -53,10 +61,10 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
 
         lblCartaoSUS.setText("Nº Cartão SUS: ");
 
-        jButton1.setText("Pesquisar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPesquisarActionPerformed(evt);
             }
         });
 
@@ -70,7 +78,7 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCartaoSUS, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -79,7 +87,7 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCartaoSUS)
                     .addComponent(txtCartaoSUS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnPesquisar))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
@@ -87,7 +95,7 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
 
         jLabel1.setText("Nome:");
 
-        jTextField1.setEditable(false);
+        txtNome.setEditable(false);
 
         lblRG.setText("RG:");
 
@@ -99,11 +107,8 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
 
         jLabel3.setText("Urgência:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vermelha (Prioridade 0)", "Amarela (Prioridade 1)", "Verde (Prioridade 2)" }));
-
-        lblNumeroConsulta.setText("Nº da Consulta:");
-
-        txtNumeroConsulta.setEditable(false);
+        cmbSituacao.setEditable(true);
+        cmbSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vermelha (Prioridade 0)", "Amarela (Prioridade 1)", "Verde (Prioridade 2)" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -117,22 +122,17 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblDataNascimento))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblNumeroConsulta)))
+                            .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDataNascimento)
-                            .addComponent(txtNumeroConsulta))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtDataNascimento)))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +140,7 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,9 +150,7 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNumeroConsulta)
-                    .addComponent(txtNumeroConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -167,6 +165,11 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
         });
 
         btnConfirmarConsulta.setText("Confimar Consulta");
+        btnConfirmarConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarConsultaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,9 +218,56 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        try {
+            Connection con = Conexao.abrirConexao();
+            Consulta cb = new Consulta();
+            Paciente pb = new Paciente();
+            ConsultaDAO cd = new ConsultaDAO(con);
+
+            pb.setCartaoSUS(txtCartaoSUS.getText());
+            cd.retornaPaciente(pb);
+
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao buscar paciente!");
+        }
+
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnConfirmarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarConsultaActionPerformed
+        try { 
+            Connection con = Conexao.abrirConexao();                                    //NÃO FUNCIONANDO AINDA
+            Consulta cb = new Consulta();
+            Paciente pb = new Paciente();
+            ConsultaDAO cd = new ConsultaDAO(con);
+
+            //Lê e trata o campo Urgência
+            String urg = (String) cmbSituacao.getSelectedItem();
+            if (urg.equals("Vermelha (Prioridade 0)")) {
+                cb.setUrgente(0);
+            } else if (urg.equals("Amarela (Prioridade 1)")) {
+                cb.setUrgente(1);
+            } else {
+                cb.setUrgente(2);
+            }
+            //FIM
+
+            pb.setCartaoSUS(txtCartaoSUS.getText());
+            cb.setSituacao(2);
+            
+           // cb.setData();
+           // cb.setHora();
+
+            cd.novaConsulta(cb, pb);
+            Conexao.fecharConexao(con);
+            JOptionPane.showConfirmDialog(this, "Consulta criada com sucesso!");
+
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro criar consulta!");
+        }
+    }//GEN-LAST:event_btnConfirmarConsultaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,22 +306,20 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmarConsulta;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmbSituacao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCartaoSUS;
     private javax.swing.JLabel lblDataNascimento;
-    private javax.swing.JLabel lblNumeroConsulta;
     private javax.swing.JLabel lblRG;
     private javax.swing.JTextField txtCartaoSUS;
-    private javax.swing.JTextField txtDataNascimento;
-    private javax.swing.JTextField txtNumeroConsulta;
-    private javax.swing.JTextField txtRG;
+    public static javax.swing.JTextField txtDataNascimento;
+    public static javax.swing.JTextField txtNome;
+    public static javax.swing.JTextField txtRG;
     // End of variables declaration//GEN-END:variables
 }

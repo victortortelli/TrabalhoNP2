@@ -7,6 +7,20 @@ ATENÇÃO: Pessoal, quando forem testar o programa nunca se esqueçam de conferi
 Sempre que for fazer mudanças, abra um novo branch no git para evitarmos conflito no master (git checkout -b nome_do_branch)
 ============================================================================================================================
 
+
+update victortortelli 17/11/19
+---
+Em NovaConsultaGUI:
+- Botão pesquisar já funcionando. Ao pesquisar pelo numero do cartao sus, a função retornaPaciente() é chamda e os dados sao 
+automaticamente preenchidos nos campos abaixo para conferência
+- Campo Número da Consulta apagado
+
+
+Em ConsultaDAO:
+- Criada função retornaPaciente(), Já funcionando
+
+
+
 update victortortelli 16/11/19
 ---
 Em PacienteDAO:

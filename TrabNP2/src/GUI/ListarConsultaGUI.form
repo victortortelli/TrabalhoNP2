@@ -134,6 +134,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDataConsultaActionPerformed"/>
           </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xa;this.txtDataConsulta = new javax.swing.JFormattedTextField(mascaraData);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>

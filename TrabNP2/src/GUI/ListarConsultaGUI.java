@@ -36,6 +36,12 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
         panelBuscarConsultas = new javax.swing.JPanel();
         lblDataConsulta = new javax.swing.JLabel();
         txtDataConsulta = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter("##/##/####");
+            this.txtDataConsulta = new javax.swing.JFormattedTextField(mascaraData);
+        }
+        catch (Exception e){
+        }
         lblOu = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtNumeroConsulta = new javax.swing.JTextField();
@@ -231,7 +237,7 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
             Consulta cb = new Consulta();
             ConsultaDAO cd = new ConsultaDAO(con);
 
-            // Sintaxe para formatação de data de nascimento de acordo com o banco
+            // Sintaxe para formatação de data de acordo com o banco
             String text = txtDataConsulta.getText();
             java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
             java.time.LocalDate textFieldAsDate = java.time.LocalDate.parse(text, formatter);

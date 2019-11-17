@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import GUI.ListarConsultaGUI;
 import net.proteanit.sql.DbUtils;
+import Objetos.Paciente;
+import GUI.NovaConsultaGUI;
 
 /**
  *
@@ -21,6 +23,46 @@ public class ConsultaDAO extends DAO {
 
     public ConsultaDAO(Connection con) {
         super(con);
+    }
+
+    public String novaConsulta(Consulta consulta, Paciente paciente) {
+        try {
+            String sql = "INSERT INTO consulta values (?,?,?,?,?) ";  //ESPERANDO BANCO SER CORRIGIDO PARA IMPLEMENTAR
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            
+            ps.setInt(1, consulta.getNumero());
+            ps.setString (2, paciente.getCartaoSUS());
+            ps.setDate(3, consulta.getData());
+            ps.setString (4, consulta.getHora());
+            ps.setInt(5, consulta.getSituacao());
+            ps.setInt(6, consulta.getUrgente());
+
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+
+        return null;
+
+    }
+
+    public String retornaPaciente(Paciente paciente) {
+        try {
+            String sql = "SELECT nome, rg, nascimento FROM pacientes WHERE cartao_sus = ? ";
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ResultSet rs;
+            ps.setString(1, paciente.getCartaoSUS());
+            rs = ps.executeQuery(); //EXECUTA A LINHA DO SQL E PEGA OS RESULTADOS
+            
+            //PEGA OS DADOS QUE FORAM RETORNADOS PELA TABELA
+            if (rs.next()) {
+                NovaConsultaGUI.txtNome.setText(rs.getString("nome"));
+                NovaConsultaGUI.txtRG.setText(rs.getString("rg"));
+                NovaConsultaGUI.txtDataNascimento.setText(rs.getString("nascimento"));
+            }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+        return null;
     }
 
     public Consulta buscarPaciente(String cartaoSUS) {
@@ -42,6 +84,7 @@ public class ConsultaDAO extends DAO {
     }
 
     public void listarConsultas(Consulta consulta) {
+        //SE AMBOS OS CAMPOS ESTIVEREM VAZIOS ELE BUSCA TODAS AS CONSULTAS
         if (ListarConsultaGUI.txtDataConsulta.getText().startsWith(" ") == true && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == true) {
             String sql = "SELECT * FROM consulta;";
             try {
@@ -52,6 +95,7 @@ public class ConsultaDAO extends DAO {
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
+            //SE APENAS O NUMERO DA CONSULTA ESTIVE VAZIO ELE BUSCA PELA DATA
         } else if (ListarConsultaGUI.txtDataConsulta.getText().startsWith(" ") == false && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == true) {
             String sql = "SELECT * FROM consulta WHERE data_consulta = ?";
             try {
@@ -63,8 +107,8 @@ public class ConsultaDAO extends DAO {
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-        }
-        else if(ListarConsultaGUI.txtDataConsulta.getText().startsWith(" ") == true && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == false){
+            //SE APENAS A DATA ESTIVER VAZIA ELE BUSCA PELO NUMERO DA CONSULTA
+        } else if (ListarConsultaGUI.txtDataConsulta.getText().startsWith(" ") == true && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == false) {
             String sql = "SELECT * FROM consulta WHERE id = ?";
             try {
                 PreparedStatement ps = this.getCon().prepareStatement(sql);
@@ -77,20 +121,19 @@ public class ConsultaDAO extends DAO {
             }
         }
     }
-    
-    public String deletarConsulta(Consulta consulta){
+
+    public String deletarConsulta(Consulta consulta) {
         String sql = "DELETE FROM consulta WHERE id = ?";
-        try{
+        try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
             ps.setInt(1, consulta.getNumero());
 
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-        catch(SQLException e){
-             System.out.println(e.getMessage());
-        }
-        
+
         return null;
-        
+
     }
 
 }
