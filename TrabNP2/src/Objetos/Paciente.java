@@ -12,6 +12,48 @@ import java.util.ArrayList;
 public class Paciente extends Pessoas{
 
     /**
+     * @return the dificiencia
+     */
+    public String getDificiencia() {
+        return dificiencia;
+    }
+
+    /**
+     * @param dificiencia the dificiencia to set
+     */
+    public void setDificiencia(String dificiencia) {
+        this.dificiencia = dificiencia;
+    }
+
+    /**
+     * @return the cor
+     */
+    public String getCor() {
+        return cor;
+    }
+
+    /**
+     * @param cor the cor to set
+     */
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    /**
+     * @return the sexo
+     */
+    public String getSexo() {
+        return sexo;
+    }
+
+    /**
+     * @param sexo the sexo to set
+     */
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    /**
      * @return the cartaoSUS
      */
     public String getCartaoSUS() {
@@ -139,6 +181,9 @@ public class Paciente extends Pessoas{
     private String ddd;
     private String telefone;
     private String escola;
+    private String dificiencia;
+    private String cor;
+    private String sexo;
     private ArrayList<Consulta> consultas;
     
     public void listarConsultas(){

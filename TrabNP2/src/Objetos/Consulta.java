@@ -8,6 +8,8 @@ package Objetos;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.sql.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -18,16 +20,31 @@ public class Consulta {
     /**
      * @return the data
      */
-    public GregorianCalendar getData() {
+    public Date getData() {
         return data;
     }
 
     /**
      * @param data the data to set
      */
-    public void setData(GregorianCalendar data) {
+    public void setData(Date data) {
         this.data = data;
     }
+
+    /**
+     * @return the numero
+     */
+    public int getNumero() {
+        return numero;
+    }
+
+    /**
+     * @param numero the numero to set
+     */
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
 
     /**
      * @return the hora
@@ -70,11 +87,13 @@ public class Consulta {
     public void setUrgencia(int urgencia) {
         this.urgencia = urgencia;
     }
-    private GregorianCalendar data;
+    //private GregorianCalendar data;
+    private Date data;
     private String hora; //ta pegando a hora no construtor
     private int situacao;//0 - fechado, 1 - em andamento e 2- aberto
     private int urgencia;
     Diagnostico diagnostico;
+    private int numero;
     
     public Consulta(){
         //--*

@@ -1,9 +1,35 @@
 # TrabNP2
 trabalho da np2 de poo 4 semestre 2019/2
 
+============================================================================================================================ 
 ATENÇÃO: Pessoal, quando forem testar o programa nunca se esqueçam de conferir as credenciais para fazer login com o banco!
 
 Sempre que for fazer mudanças, abra um novo branch no git para evitarmos conflito no master (git checkout -b nome_do_branch)
+============================================================================================================================
+
+update victortortelli 16/11/19
+---
+Em PacienteDAO:
+- Função selectAll() já pronta e funcionando
+
+Em ListarUsuariosGUI:
+- Botão pesquisar funcionando. Quando nenhum campo é preenchido, todos os usuários são listados
+Quando o campo Cartao_sus é preenchido, retorna apenas o paciente correspondente
+- Removido botão de Atualizar
+
+Em ListarConsultaGUI():
+- Removido botão Atualizar Consulta
+- Botão de Cancelar consulta finalizado, falta testar
+
+Em Consulta():
+- Criada variavel data (compativel com mysql) e variavel numero (numero da consulta)
+
+Em ConsultaDAO():
+- Criada função listarConsultas(), já funcionando
+
+Em Banco de Dados:
+- Para facilitar a programação, separei a coluna data (datetime) em duas: data (date) e hora (time).
+
 
 
 update victortortelli 14/11/19
@@ -17,7 +43,6 @@ a possibilidade de registrar a certidão de nascimento CN no lugar
 - Todos os campos obrigatórios agora tem um *
 - Criada a armadilha para que não possa ser selecionado as duas opções de sexo ao mesmo tempo (buga as vezes)
 - Criada uma função que retorna um String com o sexo selecionado
-
 
 Em Paciente:
 - Criado atributos cor/raça, sexo e deficiencia
