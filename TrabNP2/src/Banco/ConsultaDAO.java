@@ -27,15 +27,12 @@ public class ConsultaDAO extends DAO {
 
     public String novaConsulta(Consulta consulta, Paciente paciente) {
         try {
-            String sql = "INSERT INTO consulta values (?,?,?,?,?) ";  //ESPERANDO BANCO SER CORRIGIDO PARA IMPLEMENTAR
+            String sql = "insert into consulta (cartao_sus_pacientes, data_hora_consulta, cstatus, urgente) values (?, NOW(), ?, ?);";
             PreparedStatement ps = this.getCon().prepareStatement(sql);
-            
-            ps.setInt(1, consulta.getNumero());
-            ps.setString (2, paciente.getCartaoSUS());
-            ps.setDate(3, consulta.getData());
-            ps.setString (4, consulta.getHora());
-            ps.setInt(5, consulta.getSituacao());
-            ps.setInt(6, consulta.getUrgente());
+                     
+            ps.setString (1, paciente.getCartaoSUS());
+            ps.setInt(2, consulta.getSituacao());
+            ps.setInt(3, consulta.getUrgente());
 
         } catch (SQLException e) {
             return e.getMessage();

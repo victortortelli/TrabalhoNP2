@@ -12,8 +12,6 @@ import Objetos.Consulta;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import Objetos.Paciente;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -41,6 +39,12 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblCartaoSUS = new javax.swing.JLabel();
         txtCartaoSUS = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter mascaraCartaoSus= new javax.swing.text.MaskFormatter("### #### #### ####");
+            this.txtCartaoSUS = new javax.swing.JFormattedTextField(mascaraCartaoSus);
+        }
+        catch (Exception e){
+        }
         btnPesquisar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -228,6 +232,8 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
             pb.setCartaoSUS(txtCartaoSUS.getText());
             cd.retornaPaciente(pb);
 
+            Conexao.fecharConexao(con);
+
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "Erro ao buscar paciente!");
@@ -236,8 +242,8 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnConfirmarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarConsultaActionPerformed
-        try { 
-            Connection con = Conexao.abrirConexao();                                    //NÃO FUNCIONANDO AINDA
+        try {
+            Connection con = Conexao.abrirConexao();
             Consulta cb = new Consulta();
             Paciente pb = new Paciente();
             ConsultaDAO cd = new ConsultaDAO(con);
@@ -255,9 +261,6 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
 
             pb.setCartaoSUS(txtCartaoSUS.getText());
             cb.setSituacao(2);
-            
-           // cb.setData();
-           // cb.setHora();
 
             cd.novaConsulta(cb, pb);
             Conexao.fecharConexao(con);

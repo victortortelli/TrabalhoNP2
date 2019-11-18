@@ -30,23 +30,27 @@ public class PacienteDAO {
     }
 
     public String insert(Paciente paciente) {
-        String sql = "INSERT INTO pacientes(nome,nascimento,cpf,cartao_sus,rg,rua,bairro,numero,complemento,cidade,estado,ddd,telefone,escola) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO pacientes(cartao_sus,nome,cpf,nascimento,cor,deficiencia,sexo,rg,rua,bairro,numero,complemento,cidade,estado,ddd,telefone,escola) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
-            ps.setString(1, paciente.getNome());
-            ps.setDate(2, paciente.getDataNascMysql());
+            ps.setString(1, paciente.getCartaoSUS());
+            ps.setString(2, paciente.getNome());
             ps.setString(3, paciente.getCpf());
-            ps.setString(4, paciente.getCartaoSUS());
-            ps.setString(5, paciente.getRg());
-            ps.setString(6, paciente.getEndereco());
-            ps.setString(7, paciente.getBairro());
-            ps.setString(8, paciente.getNumero());
-            ps.setString(9, paciente.getComplemento());
-            ps.setString(10, paciente.getCidade());
-            ps.setString(11, paciente.getEstado());
-            ps.setString(12, paciente.getDdd());
-            ps.setString(13, paciente.getTelefone());
-            ps.setString(14, paciente.getEscola());
+            ps.setDate(4, paciente.getDataNascMysql());
+            ps.setString(5, paciente.getCor());
+            ps.setString(6, paciente.getDificiencia());
+            ps.setString(7, paciente.getSexo());
+            ps.setString(8, paciente.getRg());
+            ps.setString(9, paciente.getEndereco());
+            ps.setString(10, paciente.getBairro());
+            ps.setString(11, paciente.getNumero());
+            ps.setString(12, paciente.getComplemento());
+            ps.setString(13, paciente.getCidade());
+            ps.setString(14, paciente.getEstado());
+            ps.setString(15, paciente.getDdd());
+            ps.setString(16, paciente.getTelefone());
+            ps.setString(17, paciente.getEscola());
+            
 
             if (ps.executeUpdate() > 0) {
                 return "Dados inseridos com sucesso! (cpf,nome,cartaoSUS)";
@@ -96,7 +100,7 @@ public class PacienteDAO {
 
         if (ListarUsuariosGUI.txtCartaoSUS.getText().isBlank() == true) {
 
-            String sql = "SELECT id, nome, nascimento, cpf, cartao_sus, rg FROM pacientes;";
+            String sql = "SELECT cartao_sus, nome, nascimento, cpf, rg FROM pacientes;";
             try {
                 PreparedStatement ps = this.getCon().prepareStatement(sql);
                 ResultSet rs = ps.executeQuery();
@@ -108,7 +112,7 @@ public class PacienteDAO {
             }
 
         } else {
-            String sql = "SELECT id, nome, nascimento, cpf, rg FROM pacientes WHERE cartao_sus = ?;";
+            String sql = "SELECT nome, nascimento, cpf, rg FROM pacientes WHERE cartao_sus = ?;";
             try {
                 PreparedStatement ps = this.getCon().prepareStatement(sql);
                 ps.setString(1, pp.getCartaoSUS());

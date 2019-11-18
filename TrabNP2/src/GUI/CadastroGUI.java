@@ -562,18 +562,15 @@ public class CadastroGUI extends javax.swing.JFrame {
                 pb.setNumero(txtNumero.getText());
                 pb.setTelefone(txtTelefone.getText());
                 pb.setEscola(txtEscola.getText());
+                pb.setEstado(uf);
+                pb.setDificiencia(deficiencia);
+                pb.setCor(cor);
+                pb.setSexo(SelecionaSexo());
 
                 //Criando uma string com apenas o DDD e setando no banco
                 String ddd = "";
                 ddd = pb.getTelefone().substring(1, 3);
                 pb.setDdd(ddd);
-                //FIM
-
-                // A partir daqui ainda não está sendo enviado ao banco
-                pb.setEstado(uf);
-                pb.setDificiencia(deficiencia);
-                pb.setCor(cor);
-                pb.setSexo(SelecionaSexo());
                 //FIM
 
                 pd.insert(pb);
