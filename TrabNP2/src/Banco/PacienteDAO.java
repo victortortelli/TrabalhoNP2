@@ -100,7 +100,7 @@ public class PacienteDAO {
 
         if (ListarUsuariosGUI.txtCartaoSUS.getText().isBlank() == true) {
 
-            String sql = "SELECT cartao_sus, nome, nascimento, cpf, rg FROM pacientes;";
+            String sql = "SELECT nome AS 'Nome', rg AS 'RG', cartao_sus AS 'Nº Cartão SUS' FROM pacientes;";
             try {
                 PreparedStatement ps = this.getCon().prepareStatement(sql);
                 ResultSet rs = ps.executeQuery();
@@ -112,7 +112,7 @@ public class PacienteDAO {
             }
 
         } else {
-            String sql = "SELECT nome, nascimento, cpf, rg FROM pacientes WHERE cartao_sus = ?;";
+            String sql = "SELECT nome AS 'Nome', rg AS 'RG', cartao_sus AS 'Nº Cartão SUS' FROM pacientes WHERE cartao_sus = ?;";
             try {
                 PreparedStatement ps = this.getCon().prepareStatement(sql);
                 ps.setString(1, pp.getCartaoSUS());
