@@ -25,6 +25,16 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
 
+        try {
+            Connection con = Conexao.abrirConexao();
+            Paciente pp = new Paciente();
+            PacienteDAO pd = new PacienteDAO(con);
+
+            pd.mostrarTodos(pp);
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     /**
@@ -117,38 +127,16 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
 
         tblResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Nome", "RG", "Nº Cartão SUS"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
+        tblResultados.setColumnSelectionAllowed(true);
+        tblResultados.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblResultados);
+        tblResultados.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout panelResultadosLayout = new javax.swing.GroupLayout(panelResultados);
         panelResultados.setLayout(panelResultadosLayout);
@@ -231,11 +219,30 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnNovaConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovaConsultaActionPerformed
-        this.dispose();
-        NovaConsultaGUI telaNovaConsulta = new NovaConsultaGUI();
+
+        NovaConsultaGUI telaNovaConsulta;
+        int linha;
+        String cartaoSusSelecionado;
+
+        try {
+            linha = tblResultados.getSelectedRow();
+            cartaoSusSelecionado = tblResultados.getValueAt(linha, 2).toString();
+        } catch (Exception e) {
+            cartaoSusSelecionado = "";
+        }
+
+        if (cartaoSusSelecionado != "") {
+
+            telaNovaConsulta = new NovaConsultaGUI(cartaoSusSelecionado);
+        } else {
+
+            telaNovaConsulta = new NovaConsultaGUI();
+        }
         telaNovaConsulta.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnNovaConsultaActionPerformed
 
+   
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
 
         try {
@@ -243,11 +250,19 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
             Paciente pp = new Paciente();
             PacienteDAO pd = new PacienteDAO(con);
 
-            pp.setNome(txtNome.getText());
-            pp.setRg(txtRG.getText());
-            pp.setCartaoSUS(txtCartaoSUS.getText());
-
-            pd.selectAll(pp);
+            if (!this.txtCartaoSUS.getText().isBlank()) {
+                pd.buscarPeloCartaoSUS(pp, this.txtCartaoSUS.getText());
+            } else {
+                if (!this.txtNome.getText().isBlank()) {
+                    pd.buscarPeloNome(pp, this.txtNome.getText());
+                } else {
+                    if (!this.txtRG.getText().isBlank()) {
+                        pd.buscarPeloRg(pp, this.txtRG.getText());
+                    } else {
+                        pd.mostrarTodos(pp);
+                    }
+                }
+            }
 
             Conexao.fecharConexao(con);
 
@@ -255,6 +270,7 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "Erro ao buscar usuario(s)!");
         }
+        this.txtCartaoSUS.setText("");
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -302,7 +318,7 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
     private javax.swing.JPanel panelPesquisar;
     private javax.swing.JPanel panelResultados;
     public static javax.swing.JTable tblResultados;
-    public static javax.swing.JTextField txtCartaoSUS;
+    javax.swing.JTextField txtCartaoSUS;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtRG;
     // End of variables declaration//GEN-END:variables

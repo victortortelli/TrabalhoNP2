@@ -50,7 +50,6 @@ public class PacienteDAO {
             ps.setString(15, paciente.getDdd());
             ps.setString(16, paciente.getTelefone());
             ps.setString(17, paciente.getEscola());
-            
 
             if (ps.executeUpdate() > 0) {
                 return "Dados inseridos com sucesso!";
@@ -96,35 +95,58 @@ public class PacienteDAO {
         }
     }
 
-    public String selectAll(Paciente pp) {
+    public void buscarPeloNome(Paciente pp, String nome) {
 
-        if (ListarUsuariosGUI.txtCartaoSUS.getText().isBlank() == true) {
+        String sql = "SELECT nome AS 'Nome', rg AS 'RG', cartao_sus AS 'Nº Cartão SUS' FROM pacientes WHERE nome LIKE \'" + nome + "%';";
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            ListarUsuariosGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
 
-            String sql = "SELECT nome AS 'Nome', rg AS 'RG', cartao_sus AS 'Nº Cartão SUS' FROM pacientes;";
-            try {
-                PreparedStatement ps = this.getCon().prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
-                ListarUsuariosGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
-
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                return null;
-            }
-
-        } else {
-            String sql = "SELECT nome AS 'Nome', rg AS 'RG', cartao_sus AS 'Nº Cartão SUS' FROM pacientes WHERE cartao_sus = ?;";
-            try {
-                PreparedStatement ps = this.getCon().prepareStatement(sql);
-                ps.setString(1, pp.getCartaoSUS());
-                ResultSet rs = ps.executeQuery();
-                ListarUsuariosGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
-
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                return null;
-            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-        return null;
+    }
+
+    public void buscarPeloCartaoSUS(Paciente pp, String cartaosus) {
+
+        String sql = "SELECT nome AS 'Nome', rg AS 'RG', cartao_sus AS 'Nº Cartão SUS' FROM pacientes WHERE cartao_sus = '" + cartaosus + "';";
+        System.out.println(sql);
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            ListarUsuariosGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void buscarPeloRg(Paciente pp, String rg) {
+
+        String sql = "SELECT nome AS 'Nome', rg AS 'RG', cartao_sus AS 'Nº Cartão SUS' FROM pacientes WHERE rg = '" + rg + "';";
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            ListarUsuariosGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void mostrarTodos(Paciente pp) {
+
+        String sql = "SELECT nome AS 'Nome', rg AS 'RG', cartao_sus AS 'Nº Cartão SUS' FROM pacientes;";
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            ListarUsuariosGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
     }
 
 }

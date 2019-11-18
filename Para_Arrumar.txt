@@ -1,13 +1,14 @@
 Em CadastroGUI()
 - Botão não funcionando (Victor)
-- Não cadastrando (Pupo)
+- Não cadastrando (Pupo) -- OK
 
 Em ListarConsulta()
 - Não lista por causa do formato da data
 
 Em ListarUsuarios()
-- Mudar nome das colunas
-- Aprimorar opções de busca
+- Mudar nome das colunas -- OK
+- Aprimorar opções de busca --OK
+- Adicionar um visualizar usuário
 
 Em FarmaciaDAO()
 - Conseguir pesquisar as consultas ja fechadas (situacao=0)

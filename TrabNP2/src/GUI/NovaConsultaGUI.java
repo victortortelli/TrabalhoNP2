@@ -26,6 +26,28 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    public NovaConsultaGUI(String cartaoSus) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.txtCartaoSUS.setText(cartaoSus);
+        
+        try {
+            Connection con = Conexao.abrirConexao();
+            Consulta cb = new Consulta();
+            Paciente pb = new Paciente();
+            ConsultaDAO cd = new ConsultaDAO(con);
+
+            pb.setCartaoSUS(txtCartaoSUS.getText());
+            cd.retornaPaciente(pb);
+
+            Conexao.fecharConexao(con);
+
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao buscar paciente!");
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
