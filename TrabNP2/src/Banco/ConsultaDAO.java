@@ -84,7 +84,7 @@ public class ConsultaDAO extends DAO {
 
     public void listarConsultas(Consulta consulta) {
         //SE AMBOS OS CAMPOS ESTIVEREM VAZIOS ELE BUSCA TODAS AS CONSULTAS
-        if (ListarConsultaGUI.txtDataConsulta.getText().startsWith(" ") == true && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == true) {
+        if (ListarConsultaGUI.txtDataConsulta.getText().startsWith("") == true && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == true) {
             String sql = "SELECT * FROM consulta;";
             try {
                 PreparedStatement ps = this.getCon().prepareStatement(sql);
@@ -95,7 +95,7 @@ public class ConsultaDAO extends DAO {
                 System.out.println(e.getMessage());
             }
             //SE APENAS O NUMERO DA CONSULTA ESTIVE VAZIO ELE BUSCA PELA DATA
-        } else if (ListarConsultaGUI.txtDataConsulta.getText().startsWith(" ") == false && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == true) {
+        } else if (ListarConsultaGUI.txtDataConsulta.getText().startsWith("") == false && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == true) {
             String sql = "SELECT * FROM consulta WHERE data_consulta = ?";
             try {
                 PreparedStatement ps = this.getCon().prepareStatement(sql);
@@ -107,7 +107,7 @@ public class ConsultaDAO extends DAO {
                 System.out.println(e.getMessage());
             }
             //SE APENAS A DATA ESTIVER VAZIA ELE BUSCA PELO NUMERO DA CONSULTA
-        } else if (ListarConsultaGUI.txtDataConsulta.getText().startsWith(" ") == true && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == false) {
+        } else if (ListarConsultaGUI.txtDataConsulta.getText().startsWith("") == true && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == false) {
             String sql = "SELECT * FROM consulta WHERE id = ?";
             try {
                 PreparedStatement ps = this.getCon().prepareStatement(sql);
