@@ -14,6 +14,9 @@ cartao_sus varchar(20) primary key,
 nome varchar(250) not null,
 cpf varchar(14),
 nascimento date not null,
+cor varchar(15) not null,
+deficiencia varchar(15) not null,
+sexo varchar(15) not null,
 rg varchar(20) not null,
 rua varchar(180) not null,
 bairro varchar(180) not null,
@@ -36,8 +39,7 @@ create table consulta(
 id int primary key auto_increment,
 crm_medico varchar(16),
 cartao_sus_pacientes varchar(20),
-data_consulta date not null,
-hora_consulta time not null,
+data_hora datetime not null,
 cstatus tinyint not null,
 urgencia tinyint not null,
 foreign key (cartao_sus_pacientes) references pacientes(cartao_sus),
@@ -51,14 +53,16 @@ insert into profissionais (nome,cpf,nascimento,cargo) values
 insert into medicos(crm,id_profissionais,area_especializacao) values
 ("12345678-9/BR", 2, "urologia");
 
-CREATE USER 'pupo'@'localhost' IDENTIFIED WITH mysql_native_password BY 'thegreat';
+CREATE USER 'pupo'@'localhost' IDENTIFIED BY 'thegreat';
 grant select,insert,update,delete on trabalhoNp2.* to pupo@localhost;
 
-CREATE USER 'ed'@'localhost' IDENTIFIED WITH mysql_native_password BY 'willy';
+CREATE USER 'ed'@'localhost' IDENTIFIED BY 'willy';
 grant select,insert,update,delete on trabalhoNp2.* to ed@localhost;
 
-CREATE USER 'vitao'@'localhost' IDENTIFIED WITH mysql_native_password BY 'victor';
+CREATE USER 'vitao'@'localhost' IDENTIFIED BY 'victor';
 grant select on trabalhoNp2.* to vitao@localhost;
+
+select * from consulta;
 
 
 
