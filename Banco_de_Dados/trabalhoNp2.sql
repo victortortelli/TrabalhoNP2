@@ -31,6 +31,7 @@ id_profissionais int not null,
 area_especializacao varchar(150) not null,
 foreign key (id_profissionais) references profissionais(id));
 
+
 create table consulta(
 id int primary key auto_increment,
 crm_medico varchar(16),
@@ -38,6 +39,7 @@ cartao_sus_pacientes varchar(20),
 data_consulta date not null,
 hora_consulta time not null,
 cstatus tinyint not null,
+urgencia tinyint not null,
 foreign key (cartao_sus_pacientes) references pacientes(cartao_sus),
 foreign key (crm_medico) references medicos(crm));
 
