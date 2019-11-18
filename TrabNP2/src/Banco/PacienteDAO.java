@@ -53,9 +53,9 @@ public class PacienteDAO {
             
 
             if (ps.executeUpdate() > 0) {
-                return "Dados inseridos com sucesso! (cpf,nome,cartaoSUS)";
+                return "Dados inseridos com sucesso!";
             } else {
-                return "Erro ao inserir (cpf,nome,cartaoSUS)";
+                return "Erro ao inserir";
             }
         } catch (SQLException e) {
             return e.getMessage();
