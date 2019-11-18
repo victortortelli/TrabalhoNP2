@@ -6,6 +6,16 @@ ATENÇÃO: Pessoal, quando forem testar o programa nunca se esqueçam de conferi
 
 Sempre que for fazer mudanças, abra um novo branch no git para evitarmos conflito no master (git checkout -b nome_do_branch)
 ============================================================================================================================
+update guilhpupo 18/11/19
+---
+agora as buscas por usuarios em listarUsuariosGUI() funcionam da seguinte maneira:
+- todos os campos vazios : mostra todos os usuarios
+- campo cartao do sus completo : mostra o usuario daquele cartao do sus
+- campo nome completo/incompleto : mostra todos os usuarios que tem as iniciais do que estiver digitado em nome
+- campo rg completo : mostra o usuario detentor daquele rg
+
+agora também é possivel clicar em um usuario e clicar em nova consulta, e ele já abre com tudo preenchido :D
+
 update guilhpupo 17/11/19
 ---
 - Os logins agora carregam as novas telas com os dados do usuário que irá utilizar
