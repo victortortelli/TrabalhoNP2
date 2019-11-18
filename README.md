@@ -6,7 +6,10 @@ ATENÇÃO: Pessoal, quando forem testar o programa nunca se esqueçam de conferi
 
 Sempre que for fazer mudanças, abra um novo branch no git para evitarmos conflito no master (git checkout -b nome_do_branch)
 ============================================================================================================================
-
+update guilhpupo 17/11/19
+---
+- Os logins agora carregam as novas telas com os dados do usuário que irá utilizar
+- No sql do banco está os insert into dos profissionais
 
 update victortortelli 17/11/19
 ---
