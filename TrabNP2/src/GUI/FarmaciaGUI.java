@@ -158,6 +158,8 @@ public class FarmaciaGUI extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
+        LoginGUI telaLogin = new LoginGUI();
+        telaLogin.setVisible(true);/**/
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void tblVisualizarReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tblVisualizarReceitaActionPerformed

@@ -42,8 +42,8 @@
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                               <Component id="btnSair" min="-2" pref="75" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtSenha" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtCPF" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtSenha" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -68,8 +68,8 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblSenha" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSenha" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="22" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -101,8 +101,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCPF">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtSenha">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="login"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCPF">
       <Properties>
@@ -129,6 +130,8 @@
         </Property>
         <Property name="text" type="java.lang.String" value="CPF e/ou senha inv&#xe1;lido(s)!"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="txtSenha">
     </Component>
   </SubComponents>
 </Form>

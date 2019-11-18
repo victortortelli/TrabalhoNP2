@@ -7,6 +7,8 @@ package GUI;
 
 import Banco.Conexao;
 import Banco.ProfissionaisDAO;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -39,11 +41,11 @@ public class LoginGUI extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         txtCPF = new javax.swing.JTextField();
-        txtSenha = new javax.swing.JTextField();
         lblCPF = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
         lblLogin = new javax.swing.JLabel();
         lblErro = new javax.swing.JLabel();
+        txtSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +60,12 @@ public class LoginGUI extends javax.swing.JFrame {
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);
+            }
+        });
+
+        txtCPF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                login(evt);
             }
         });
 
@@ -91,8 +99,8 @@ public class LoginGUI extends javax.swing.JFrame {
                                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(61, 61, 61)
                                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtSenha)
-                            .addComponent(txtCPF))))
+                            .addComponent(txtCPF)
+                            .addComponent(txtSenha))))
                 .addContainerGap(67, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -110,8 +118,8 @@ public class LoginGUI extends javax.swing.JFrame {
                     .addComponent(lblCPF))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSenha))
+                    .addComponent(lblSenha)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
@@ -176,6 +184,11 @@ public class LoginGUI extends javax.swing.JFrame {
          System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
 
+    private void login(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_login
+        // TODO add your handling code here:
+     
+    }//GEN-LAST:event_login
+
     /**
      * @param args the command line arguments
      */
@@ -220,6 +233,6 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JTextField txtSenha;
+    private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }
