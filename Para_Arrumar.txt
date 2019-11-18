@@ -8,6 +8,7 @@ Em ListarConsulta()
 Em ListarUsuarios()
 - Mudar nome das colunas
 - Aprimorar opções de busca
+- Adicionar um visualizar usuário
 
 Em FarmaciaDAO()
 - Conseguir pesquisar as consultas ja fechadas (situacao=0)
