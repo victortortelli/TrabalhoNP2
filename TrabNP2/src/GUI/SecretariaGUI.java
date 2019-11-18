@@ -5,6 +5,13 @@
  */
 package GUI;
 
+import Banco.Conexao;
+import Banco.ProfissionaisDAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author aluno
@@ -14,9 +21,21 @@ public class SecretariaGUI extends javax.swing.JFrame {
     /**
      * Creates new form SecretariaGUI
      */
-    public SecretariaGUI() {
+    
+    
+    public SecretariaGUI(String cpf) {
         initComponents();
         this.setLocationRelativeTo(null);
+        try{
+            Connection con = Conexao.abrirConexao();
+            ProfissionaisDAO pd = new ProfissionaisDAO(con);
+            this.txtNome.setText(pd.buscarNome(cpf));
+            
+        }catch(ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e){
+            
+        }     
+        
+        this.txtCPF.setText(cpf);
     }
 
     /**
@@ -72,6 +91,10 @@ public class SecretariaGUI extends javax.swing.JFrame {
 
         panelUsuarioLogado.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuário Logado"));
 
+        txtNome.setEditable(false);
+
+        txtCPF.setEditable(false);
+
         lblNome.setText("Nome:");
 
         lblCPF.setText("CPF:");
@@ -89,7 +112,7 @@ public class SecretariaGUI extends javax.swing.JFrame {
                     .addGroup(panelUsuarioLogadoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblNome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(panelUsuarioLogadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtNome)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -221,7 +244,7 @@ public class SecretariaGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SecretariaGUI().setVisible(true);
+                
             }
         });
     }

@@ -5,6 +5,11 @@
  */
 package GUI;
 
+import Banco.Conexao;
+import Banco.ProfissionaisDAO;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 /**
  *
  * @author aluno
@@ -14,9 +19,21 @@ public class MedicoGUI extends javax.swing.JFrame {
     /**
      * Creates new form MedicoGUI
      */
-    public MedicoGUI() {
+    public MedicoGUI(String cpf) {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        try{
+            Connection con = Conexao.abrirConexao();
+            ProfissionaisDAO pd = new ProfissionaisDAO(con);
+            this.txtNomeMedico.setText(pd.buscarNome(cpf));
+            this.txtCRM.setText(pd.buscarCrm(cpf));            
+            
+        }catch(ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e){
+            
+        }     
+        
+        this.txtCPF.setText(cpf);
     }
 
     /**
@@ -89,9 +106,15 @@ public class MedicoGUI extends javax.swing.JFrame {
 
         lblNomeMedico.setText("Nome:");
 
+        txtNomeMedico.setEditable(false);
+
         lblCRM.setText("CRM:");
 
+        txtCRM.setEditable(false);
+
         lblCPF.setText("CPF:");
+
+        txtCPF.setEditable(false);
 
         javax.swing.GroupLayout panelMedicoLogadoLayout = new javax.swing.GroupLayout(panelMedicoLogado);
         panelMedicoLogado.setLayout(panelMedicoLogadoLayout);
@@ -210,7 +233,7 @@ public class MedicoGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MedicoGUI().setVisible(true);
+                
             }
         });
     }

@@ -6,6 +6,7 @@
 package GUI;
 
 import Banco.Conexao;
+import Banco.ProfissionaisDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -139,24 +140,28 @@ public class LoginGUI extends javax.swing.JFrame {
            if(con==null){
                this.lblErro.setVisible(true);
                return;
-           }
+           }          
+           
+           String cargo;                        
+           ProfissionaisDAO pd = new ProfissionaisDAO(con);
+           
+           cargo=pd.buscarCargo(login);
            
            Conexao.fecharConexao(con);
-           
             
         
-        switch(login){
-            case "pupo":
+        switch(cargo){
+            case "atendente":
                 this.dispose();
-                SecretariaGUI telaSecretaria = new SecretariaGUI();
+                SecretariaGUI telaSecretaria = new SecretariaGUI(login);
                 telaSecretaria.setVisible(true);
                 break;
-            case "ed":
+            case "médico":
                 this.dispose();
-                MedicoGUI telaMedico = new MedicoGUI();
+                MedicoGUI telaMedico = new MedicoGUI(login);
                 telaMedico.setVisible(true);
                 break;
-            case "vitao":
+            case "farmacêutico":
                 this.dispose();
                 FarmaciaGUI telaFarmacia = new FarmaciaGUI();
                 telaFarmacia.setVisible(true);
