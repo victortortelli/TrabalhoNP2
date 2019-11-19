@@ -22,7 +22,7 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,11 +35,17 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         panelBuscarConsultas = new javax.swing.JPanel();
         lblDataConsulta = new javax.swing.JLabel();
-        txtDataConsulta = new javax.swing.JTextField();
         lblOu = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtNumeroConsulta = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
+        txtDataConsulta = new javax.swing.JFormattedTextField();
+        try{
+            javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter("## ## ####");
+            this.txtDataConsulta = new javax.swing.JFormattedTextField(mascaraData);
+        }
+        catch (Exception e){
+        }
         panelResultados = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultados = new javax.swing.JTable();
@@ -54,12 +60,6 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
         panelBuscarConsultas.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Consultas"));
 
         lblDataConsulta.setText("Data da Consulta: ");
-
-        txtDataConsulta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDataConsultaActionPerformed(evt);
-            }
-        });
 
         lblOu.setText("ou");
 
@@ -79,9 +79,9 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
             .addGroup(panelBuscarConsultasLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(lblDataConsulta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtDataConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDataConsulta)
+                .addGap(18, 18, 18)
                 .addComponent(lblOu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
@@ -97,11 +97,11 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelBuscarConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDataConsulta)
-                    .addComponent(txtDataConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblOu)
                     .addComponent(jLabel4)
                     .addComponent(txtNumeroConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar))
+                    .addComponent(btnPesquisar)
+                    .addComponent(txtDataConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -188,7 +188,7 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
                             .addComponent(panelBuscarConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 133, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,10 +218,6 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDataConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataConsultaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataConsultaActionPerformed
-
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
@@ -229,9 +225,9 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         try {
             Connection con = Conexao.abrirConexao();
-            Consulta cb = new Consulta();
+            //Consulta cb = new Consulta();
             ConsultaDAO cd = new ConsultaDAO(con);
-
+            /*
             // Sintaxe para formatação de data de acordo com o banco
             String text = txtDataConsulta.getText();
             java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -243,8 +239,23 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
             cb.setData(sqlDate);
 
             cd.listarConsultas(cb);
-            Conexao.fecharConexao(con);
+            Conexao.fecharConexao(con);*/
+            if (!this.txtDataConsulta.getText().isBlank()) {
+                System.out.println("tem coisa na data");
+                cd.buscarPelaData(this.txtDataConsulta.getText());
+            } else {
+                System.out.println("nao tem coisa na data");
+                if (!ListarConsultaGUI.txtNumeroConsulta.getText().isBlank()) {
+                    System.out.println("tem coisa no numero");
+                    int id = Integer.parseInt(ListarConsultaGUI.txtNumeroConsulta.getText());
+                    cd.buscarPeloNumConsulta(id);
+                } else {
+                    System.out.println("nao tem coisa no numero");
+                    cd.mostrarTudo();
+                }
+            }
 
+            Conexao.fecharConexao(con);
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "Erro ao buscar consulta!");
@@ -259,7 +270,7 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
 
             //com a linha já selecionada noa to de clicar o mouse, setamos a coluna para 1, que é onde fica a ID das contultas
             cb.setNumero((int) tblResultados.getValueAt(linha, 1));  //checar se esse metodo funciona (ele retorna um objeto, netbeans sugeriu colocar esse (int) no começo)
-            cd.deletarConsulta(cb);
+            //cd.deletarConsulta(cb);
             Conexao.fecharConexao(con);
 
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
@@ -320,7 +331,7 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
     private javax.swing.JPanel panelBuscarConsultas;
     private javax.swing.JPanel panelResultados;
     public static javax.swing.JTable tblResultados;
-    public static javax.swing.JTextField txtDataConsulta;
+    private javax.swing.JFormattedTextField txtDataConsulta;
     public static javax.swing.JTextField txtNumeroConsulta;
     // End of variables declaration//GEN-END:variables
 }

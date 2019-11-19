@@ -16,6 +16,8 @@ import GUI.ListarUsuariosGUI;
 import net.proteanit.sql.DbUtils;
 import Objetos.Paciente;
 import GUI.NovaConsultaGUI;
+import java.sql.Date;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -31,11 +33,11 @@ public class ConsultaDAO extends DAO {
         try {
             String sql = "insert into consulta (cartao_sus_pacientes, data_hora, cstatus, urgencia) values (?, NOW(), ?, ?);";
             PreparedStatement ps = this.getCon().prepareStatement(sql);
-                     
-            ps.setString (1, paciente.getCartaoSUS());
+
+            ps.setString(1, paciente.getCartaoSUS());
             ps.setInt(2, consulta.getSituacao());
             ps.setInt(3, consulta.getUrgente());
-            
+
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -53,7 +55,7 @@ public class ConsultaDAO extends DAO {
             ResultSet rs;
             ps.setString(1, paciente.getCartaoSUS());
             rs = ps.executeQuery(); //EXECUTA A LINHA DO SQL E PEGA OS RESULTADOS
-            
+
             //PEGA OS DADOS QUE FORAM RETORNADOS PELA TABELA
             if (rs.next()) {
                 NovaConsultaGUI.txtNome.setText(rs.getString("nome"));
@@ -84,69 +86,46 @@ public class ConsultaDAO extends DAO {
         return null;
     }
 
-    public void listarConsultas(Consulta consulta) {
-        //SE AMBOS OS CAMPOS ESTIVEREM VAZIOS ELE BUSCA TODAS AS CONSULTAS
-        if (ListarConsultaGUI.txtDataConsulta.getText().startsWith("") == true && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == true) {
-            String sql = "SELECT * FROM consulta;";
-            try {
-                PreparedStatement ps = this.getCon().prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
-                ListarConsultaGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
+    public void mostrarTudo() {
 
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-            //SE APENAS O NUMERO DA CONSULTA ESTIVE VAZIO ELE BUSCA PELA DATA
-        } else if (ListarConsultaGUI.txtDataConsulta.getText().startsWith("") == false && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == true) {
-            String sql = "SELECT * FROM consulta WHERE data_consulta = ?";
-            try {
-                PreparedStatement ps = this.getCon().prepareStatement(sql);
-                ps.setDate(1, consulta.getData());
-                ResultSet rs = ps.executeQuery();
-                ListarConsultaGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
-
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-            //SE APENAS A DATA ESTIVER VAZIA ELE BUSCA PELO NUMERO DA CONSULTA
-        } else if (ListarConsultaGUI.txtDataConsulta.getText().startsWith("") == true && ListarConsultaGUI.txtNumeroConsulta.getText().isBlank() == false) {
-            String sql = "SELECT * FROM consulta WHERE id = ?";
-            try {
-                PreparedStatement ps = this.getCon().prepareStatement(sql);
-                ps.setInt(1, consulta.getNumero());
-                ResultSet rs = ps.executeQuery();
-                ListarConsultaGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
-
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    public String deletarConsulta(Consulta consulta) {
-        String sql = "DELETE FROM consulta WHERE id = ?";
+        String sql = "SELECT p.nome AS 'Nome', c.urgencia AS 'Urgência', c.id AS 'Nº da Consulta', c.cstatus AS 'Status' FROM pacientes p, consulta c WHERE p.cartao_sus = c.cartao_sus_pacientes;";
+        System.out.println(sql);
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
-            ps.setInt(1, consulta.getNumero());
+            ResultSet rs = ps.executeQuery();
+            
+            ListarConsultaGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        return null;
-
     }
-    
-    public void buscarPeloCartaoSUS(String cartaosus) {
 
-        String sql = "SELECT c.id AS 'Código', p.nome AS 'Nome', c.data_hora AS 'Data e Hora' FROM pacientes p, consulta c "
-                + "WHERE p.cartao_sus = '" + cartaosus + "' AND c.cstatus = 2"
-                + "AND p.cartao_sus = c.cartao_sus_pacientes ORDER BY c.id DESC;";
-        System.out.println(sql);
+    public void buscarPeloNumConsulta(int nConsulta) {
+
+        String sql = "SELECT p.nome AS 'Nome', c.urgencia AS 'Urgência', c.id AS 'Nº da Consulta', c.cstatus AS 'Status' FROM pacientes p, consulta c WHERE c.id = ? AND p.cartao_sus = c.cartao_sus_pacientes;";
+
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, nConsulta);
             ResultSet rs = ps.executeQuery();
-            FarmaciaGUI.tblReceitas.setModel(DbUtils.resultSetToTableModel(rs));
+            ListarConsultaGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void buscarPelaData(String data) {
+
+        String sql = "SELECT p.nome AS 'Nome', c.urgencia AS 'Urgência', c.id AS 'Nº da Consulta', c.cstatus AS 'Status' FROM pacientes p, consulta c WHERE c.data_hora LIKE '" + data + "%' AND p.cartao_sus = c.cartao_sus_pacientes;";
+
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, data);
+            ResultSet rs = ps.executeQuery();
+            ListarConsultaGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
