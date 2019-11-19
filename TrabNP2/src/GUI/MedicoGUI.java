@@ -6,9 +6,14 @@
 package GUI;
 
 import Banco.Conexao;
+import Banco.ConsultaDAO;
 import Banco.ProfissionaisDAO;
+import Objetos.Consulta;
+import Objetos.Paciente;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,21 +24,31 @@ public class MedicoGUI extends javax.swing.JFrame {
     /**
      * Creates new form MedicoGUI
      */
+    public static Paciente paciente;
+    public static Consulta consulta;
+
     public MedicoGUI(String cpf) {
         initComponents();
         this.setLocationRelativeTo(null);
-        
-        try{
+
+        try {
             Connection con = Conexao.abrirConexao();
             ProfissionaisDAO pd = new ProfissionaisDAO(con);
-            this.txtNomeMedico.setText(pd.buscarNome(cpf));
-            this.txtCRM.setText(pd.buscarCrm(cpf));            
-            
-        }catch(ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e){
-            
-        }     
-        
-        this.txtCPF.setText(cpf);
+            ConsultaDAO cd = new ConsultaDAO(con);
+
+            String nome = pd.buscarNome(cpf);
+            String crm = pd.buscarCrm(cpf);
+
+            this.txtNomeMedico.setText(nome);
+            this.txtCRM.setText(crm);
+            this.txtCPF.setText(cpf);
+
+            cd.mostrarHistoricoMedico(crm);
+
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
+
+        }
+
     }
 
     /**
@@ -47,7 +62,7 @@ public class MedicoGUI extends javax.swing.JFrame {
 
         panelHistorico = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableHistorico = new javax.swing.JTable();
+        tblHistorico = new javax.swing.JTable();
         panelMedicoLogado = new javax.swing.JPanel();
         lblNomeMedico = new javax.swing.JLabel();
         txtNomeMedico = new javax.swing.JTextField();
@@ -64,26 +79,15 @@ public class MedicoGUI extends javax.swing.JFrame {
 
         panelHistorico.setBorder(javax.swing.BorderFactory.createTitledBorder("Histórico"));
 
-        tableHistorico.setModel(new javax.swing.table.DefaultTableModel(
+        tblHistorico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Nº da Consulta", "Data", "Diagnóstico Final", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
-        jScrollPane1.setViewportView(tableHistorico);
+        ));
+        jScrollPane1.setViewportView(tblHistorico);
 
         javax.swing.GroupLayout panelHistoricoLayout = new javax.swing.GroupLayout(panelHistorico);
         panelHistorico.setLayout(panelHistoricoLayout);
@@ -161,7 +165,12 @@ public class MedicoGUI extends javax.swing.JFrame {
 
         jButton2.setText("Visualizar Consulta");
 
-        jButton3.setText("Iniciar Consulta");
+        jButton3.setText("Atender Nova Consulta");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,7 +194,7 @@ public class MedicoGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -213,6 +222,36 @@ public class MedicoGUI extends javax.swing.JFrame {
         LoginGUI telaLogin = new LoginGUI();
         telaLogin.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        try {
+            Connection con = Conexao.abrirConexao();
+            ConsultaDAO cd = new ConsultaDAO(con);
+
+            cd.melhorConsulta();
+
+            if (MedicoGUI.paciente == null) {
+                JOptionPane.showMessageDialog(this, "Não há consultas na fila para serem atendidas!");
+                Conexao.fecharConexao(con);
+                return;
+            }
+            String nomeMedico = this.txtNomeMedico.getText();
+            String crm = this.txtCRM.getText();
+            int idConsulta = 1;
+            Paciente pp = new Paciente();
+            DiagnosticoGUI telaDiagnostico = new DiagnosticoGUI(nomeMedico, crm, pp, idConsulta);
+
+            telaDiagnostico.setVisible(true);
+            Conexao.fecharConexao(con);
+            this.dispose();
+
+        } catch (HeadlessException | ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,7 +283,7 @@ public class MedicoGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
             }
         });
     }
@@ -260,7 +299,7 @@ public class MedicoGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblNomeMedico;
     private javax.swing.JPanel panelHistorico;
     private javax.swing.JPanel panelMedicoLogado;
-    private javax.swing.JTable tableHistorico;
+    public static javax.swing.JTable tblHistorico;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtCRM;
     private javax.swing.JTextField txtNomeMedico;

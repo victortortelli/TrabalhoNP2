@@ -10,7 +10,7 @@ import java.sql.SQLException;
  */
 public class Conexao {
     // -- MUDAR AQUI SE NECESSARIO
-    public static final String ip = "localhost";
+    public static final String IP = "localhost";
     public static  String login = "root";
     public static  String senha = "root";
     
@@ -22,7 +22,7 @@ public class Conexao {
             Class.forName("com.mysql.jdbc.Driver").newInstance();         
             String url ="";
             url+="jdbc:mysql://";
-            url+=ip;
+            url+=IP;
             url+="/trabalhoNp2?";
             url+="allowPublicKeyRetrieval=true&";
             url+="useSSL=false&";
@@ -47,7 +47,7 @@ public class Conexao {
         try{
             con.close();
             System.out.println("Conexão fechada para "+ login);
-        }catch(Exception e){
+        }catch(SQLException e){
             System.out.println(e.getMessage());
         }
     }

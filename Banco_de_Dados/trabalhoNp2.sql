@@ -73,4 +73,5 @@ grant select on trabalhoNp2.* to vitao@localhost;
 -- se nao quiser apagar a table consulta só da esse alter table que ta tudo certo
 -- alter table consulta add diagnosticos varchar(400);
 
+ -- select c.id, p.nome,p.cartao_sus,p.nascimento,c.urgencia  from consulta c, pacientes p where c.cartao_sus_pacientes = p.cartao_sus AND c.cstatus = 2 order by c.id AND c.urgencia;
 
