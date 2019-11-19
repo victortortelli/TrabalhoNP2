@@ -5,19 +5,16 @@
  */
 package Banco;
 
-import GUI.FarmaciaGUI;
 import Objetos.Consulta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import GUI.ListarConsultaGUI;
-import GUI.ListarUsuariosGUI;
 import net.proteanit.sql.DbUtils;
 import Objetos.Paciente;
 import GUI.NovaConsultaGUI;
 import java.sql.Date;
-import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -31,7 +28,7 @@ public class ConsultaDAO extends DAO {
 
     public String novaConsulta(Consulta consulta, Paciente paciente) {
         try {
-            String sql = "insert into consulta (cartao_sus_pacientes, data_hora, cstatus, urgencia) values (?, NOW(), ?, ?);";
+            String sql = "insert into consulta (cartao_sus_pacientes, data, cstatus, urgencia) values (?, CURDATE(), ?, ?);";
             PreparedStatement ps = this.getCon().prepareStatement(sql);
 
             ps.setString(1, paciente.getCartaoSUS());
@@ -117,13 +114,14 @@ public class ConsultaDAO extends DAO {
         }
     }
 
-    public void buscarPelaData(String data) {
+    public void buscarPelaData(Date data) {
 
-        String sql = "SELECT p.nome AS 'Nome', c.urgencia AS 'Urgência', c.id AS 'Nº da Consulta', c.cstatus AS 'Status' FROM pacientes p, consulta c WHERE c.data_hora LIKE '" + data + "%' AND p.cartao_sus = c.cartao_sus_pacientes;";
+        String sql = "SELECT p.nome AS 'Nome', c.urgencia AS 'Urgência', c.id AS 'Nº da Consulta', c.cstatus AS 'Status' FROM pacientes p, consulta c WHERE c.data = ? AND p.cartao_sus = c.cartao_sus_pacientes;";
 
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
-            ps.setString(1, data);
+            ps.setDate(1, data);
+            System.out.println(sql);
             ResultSet rs = ps.executeQuery();
             ListarConsultaGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
 

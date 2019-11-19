@@ -6,6 +6,16 @@ ATENÇÃO: Pessoal, quando forem testar o programa nunca se esqueçam de conferi
 
 Sempre que for fazer mudanças, abra um novo branch no git para evitarmos conflito no master (git checkout -b nome_do_branch)
 ============================================================================================================================
+
+update victortortelli 18/11/19
+---
+- ListarConsultaGUI funcionando totalmente, se buscar por consulta sem preencher o campo de data e nem o numero da consulta, retorna
+todas as consultas. Se buscar pelo pela data, retorna todas as consulta daquela data. Se pesquisar pelo nº da consulta retorna a consulta desejada
+- Criada coluna receita na tabela consultas
+- Em ListarConsultaGUI e NovaConsultaGUI, quando clicao em campos que são pré formatados o cursor vai para o começo do campo automaticamente
+
+
+
 update guilhpupo 18/11/19
 ---
 agora as buscas por usuarios em listarUsuariosGUI() funcionam da seguinte maneira:

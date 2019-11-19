@@ -115,6 +115,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCartaoSUS">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCartaoSUSMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;javax.swing.text.MaskFormatter mascaraCartaoSus= new javax.swing.text.MaskFormatter(&quot;### #### #### ####&quot;);&#xa;this.txtCartaoSUS = new javax.swing.JFormattedTextField(mascaraCartaoSus);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
           </AuxValues>
