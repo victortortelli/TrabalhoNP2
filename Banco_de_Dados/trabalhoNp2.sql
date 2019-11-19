@@ -12,12 +12,12 @@ cargo varchar(12) not null);
 create table pacientes(
 cartao_sus varchar(20) primary key,
 nome varchar(250) not null,
-cpf varchar(14),
+cpf varchar(14) unique,
 nascimento date not null,
 cor varchar(15) not null,
 deficiencia varchar(15) not null,
 sexo varchar(15) not null,
-rg varchar(20) not null,
+rg varchar(20) not null unique,
 rua varchar(180) not null,
 bairro varchar(180) not null,
 numero varchar(11) not null,
@@ -34,15 +34,15 @@ id_profissionais int not null,
 area_especializacao varchar(150) not null,
 foreign key (id_profissionais) references profissionais(id));
 
-
 create table consulta(
 id int primary key auto_increment,
-crm_medico varchar(16),
+crm_medico varchar(16) unique,
 cartao_sus_pacientes varchar(20),
 data date not null,
 cstatus tinyint not null,
 urgencia tinyint not null,
-receita varchar(200),
+receita varchar(400),
+diagnostico varchar(400),
 foreign key (cartao_sus_pacientes) references pacientes(cartao_sus),
 foreign key (crm_medico) references medicos(crm));
 
@@ -68,6 +68,9 @@ grant select on trabalhoNp2.* to vitao@localhost;
 
 -- insert into teste values (CURDATE(), CURTIME(), NOW());
 
+-- drop database trabalhoNp2;
 
+-- se nao quiser apagar a table consulta só da esse alter table que ta tudo certo
+-- alter table consulta add diagnosticos varchar(400);
 
 
