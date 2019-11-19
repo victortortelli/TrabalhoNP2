@@ -146,7 +146,7 @@ public class CadastroGUI extends javax.swing.JFrame {
 
         panelEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
 
-        lblComplemento.setText("* Complemento:");
+        lblComplemento.setText(" Complemento:");
 
         lblBairro.setText("* Bairro:");
 
@@ -241,7 +241,7 @@ public class CadastroGUI extends javax.swing.JFrame {
 
         lblNome.setText("* Nome:");
 
-        lblCPF.setText("* CPF:");
+        lblCPF.setText(" CPF:");
 
         lblCartaoSUS.setText("* Nº Cartão SUS:");
 
@@ -416,7 +416,7 @@ public class CadastroGUI extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("CADASTRAR USUÁRIO");
+        jLabel5.setText("CADASTRAR PACIENTE");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -440,7 +440,7 @@ public class CadastroGUI extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(panelDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 708, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -575,12 +575,9 @@ public class CadastroGUI extends javax.swing.JFrame {
 
                 pd.insert(pb);
                 Conexao.fecharConexao(con);
-                int continua = JOptionPane.showConfirmDialog(this, "Paciente cadastrado com sucesso!");
-
-                if (continua == 1) {
-                    this.dispose();
-                    CadastroGUI novaTela = new CadastroGUI();
-                }
+                JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!");
+                
+                this.dispose();
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
                 System.out.println(e.getMessage());
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar paciente!");

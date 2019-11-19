@@ -170,7 +170,7 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
         });
 
         lblListarUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblListarUsuario.setText("LISTAR USUÁRIO");
+        lblListarUsuario.setText("LISTAR PACIENTES");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,7 +186,7 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(312, 312, 312)
                         .addComponent(lblListarUsuario)
-                        .addGap(0, 312, Short.MAX_VALUE)))
+                        .addGap(0, 296, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -265,10 +265,12 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
             }
 
             Conexao.fecharConexao(con);
+            
+            JOptionPane.showMessageDialog(this, "Pesquisa concluída!");
 
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
             System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, "Erro ao buscar usuario(s)!");
+            JOptionPane.showMessageDialog(this, "Erro ao buscar usuário(s)!");
         }
         this.txtCartaoSUS.setText("");
 
