@@ -1,14 +1,13 @@
 Em CadastroGUI()
-- Botão não funcionando (Victor)
+- Botão não funcionando (Victor) OK
 - Não cadastrando (Pupo) -- OK
-
-Em ListarConsulta()
-- Não lista por causa do formato da data
+- Criar os if´s caso algum campo (null) não seja preenchido.
 
 Em ListarUsuarios()
 - Mudar nome das colunas -- OK
 - Aprimorar opções de busca --OK
 - Adicionar um visualizar usuário
+- Tentar pegar a data do banco e mostrar no formato convencional dd/mm/yyy
 
 Em FarmaciaDAO()
 - Conseguir pesquisar as consultas ja fechadas (situacao=0)
@@ -22,7 +21,7 @@ Em MedicoGUI()
 - Checar se consulta ainda esta situacao=2 antes de iniciar o atendimento
 
 Em Banco_de_Dados
-- Adicionar campo receita na tabela consulta (adicionado juntamente como crm do medico, ao finalizar uma consulta)
+- Adicionar campo receita na tabela consulta (adicionado juntamente como crm do medico, ao finalizar uma consulta) OK
 
 Em ProntuarioGUI() (Ficar por ultimo, se não der tempo vai virar um TextArea gigantesco 58")
 - Fazer tudo kkk

@@ -87,6 +87,12 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
 
         lblCartaoSUS.setText("Nº Cartão SUS: ");
 
+        txtCartaoSUS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCartaoSUSMouseClicked(evt);
+            }
+        });
+
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,6 +299,10 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro criar consulta!");
         }
     }//GEN-LAST:event_btnConfirmarConsultaActionPerformed
+
+    private void txtCartaoSUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCartaoSUSMouseClicked
+        txtCartaoSUS.setCaretPosition(0);
+    }//GEN-LAST:event_txtCartaoSUSMouseClicked
 
     /**
      * @param args the command line arguments

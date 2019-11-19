@@ -39,9 +39,10 @@ create table consulta(
 id int primary key auto_increment,
 crm_medico varchar(16),
 cartao_sus_pacientes varchar(20),
-data_hora datetime not null,
+data date not null,
 cstatus tinyint not null,
 urgencia tinyint not null,
+receita varchar(200),
 foreign key (cartao_sus_pacientes) references pacientes(cartao_sus),
 foreign key (crm_medico) references medicos(crm));
 
@@ -62,8 +63,10 @@ grant select,insert,update,delete on trabalhoNp2.* to ed@localhost;
 CREATE USER 'vitao'@'localhost' IDENTIFIED BY 'victor';
 grant select on trabalhoNp2.* to vitao@localhost;
 
-select * from consulta;
+-- select * from consulta;
+-- select * from pacientes;
 
+-- insert into teste values (CURDATE(), CURTIME(), NOW());
 
 
 

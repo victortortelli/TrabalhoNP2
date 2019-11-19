@@ -41,7 +41,7 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
         btnPesquisar = new javax.swing.JButton();
         txtDataConsulta = new javax.swing.JFormattedTextField();
         try{
-            javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter("## ## ####");
+            javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter("##/##/####");
             this.txtDataConsulta = new javax.swing.JFormattedTextField(mascaraData);
         }
         catch (Exception e){
@@ -69,6 +69,12 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarActionPerformed(evt);
+            }
+        });
+
+        txtDataConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDataConsultaMouseClicked(evt);
             }
         });
 
@@ -227,22 +233,17 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
             Connection con = Conexao.abrirConexao();
             //Consulta cb = new Consulta();
             ConsultaDAO cd = new ConsultaDAO(con);
-            /*
+
             // Sintaxe para formatação de data de acordo com o banco
             String text = txtDataConsulta.getText();
+            char c = text.charAt(0);
+            if (c != ' '){
             java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
             java.time.LocalDate textFieldAsDate = java.time.LocalDate.parse(text, formatter);
             java.sql.Date sqlDate = java.sql.Date.valueOf(textFieldAsDate);
-            //Fim
-
-            cb.setNumero(Integer.parseInt(txtNumeroConsulta.getText()));
-            cb.setData(sqlDate);
-
-            cd.listarConsultas(cb);
-            Conexao.fecharConexao(con);*/
-            if (!this.txtDataConsulta.getText().isBlank()) {
-                System.out.println("tem coisa na data");
-                cd.buscarPelaData(this.txtDataConsulta.getText());
+            System.out.println("tem coisa na data");
+            cd.buscarPelaData(sqlDate);
+        
             } else {
                 System.out.println("nao tem coisa na data");
                 if (!ListarConsultaGUI.txtNumeroConsulta.getText().isBlank()) {
@@ -283,6 +284,10 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
         //seleciona a linha que foi clicada
         linha = tblResultados.getSelectedRow();
     }//GEN-LAST:event_tblResultadosMouseClicked
+
+    private void txtDataConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDataConsultaMouseClicked
+        txtDataConsulta.setCaretPosition(0);
+    }//GEN-LAST:event_txtDataConsultaMouseClicked
 
     /**
      * @param args the command line arguments
