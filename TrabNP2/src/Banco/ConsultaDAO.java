@@ -5,12 +5,14 @@
  */
 package Banco;
 
+import GUI.FarmaciaGUI;
 import Objetos.Consulta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import GUI.ListarConsultaGUI;
+import GUI.ListarUsuariosGUI;
 import net.proteanit.sql.DbUtils;
 import Objetos.Paciente;
 import GUI.NovaConsultaGUI;
@@ -133,6 +135,22 @@ public class ConsultaDAO extends DAO {
 
         return null;
 
+    }
+    
+    public void buscarPeloCartaoSUS(String cartaosus) {
+
+        String sql = "SELECT c.id AS 'Código', p.nome AS 'Nome', c.data_hora AS 'Data e Hora' FROM pacientes p, consulta c "
+                + "WHERE p.cartao_sus = '" + cartaosus + "' AND c.cstatus = 2"
+                + "AND p.cartao_sus = c.cartao_sus_pacientes ORDER BY c.id DESC;";
+        System.out.println(sql);
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            FarmaciaGUI.tblReceitas.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
