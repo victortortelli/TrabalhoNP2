@@ -1,8 +1,8 @@
 package GUI;
 
 import Banco.Conexao;
+import Banco.ConsultaDAO;
 import java.sql.Connection;
-import Banco.FarmaciaDAO;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 
@@ -21,6 +21,12 @@ public class FarmaciaGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtCartaoSUS = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter mascaraCartaoSus= new javax.swing.text.MaskFormatter("### #### #### ####");
+            this.txtCartaoSUS = new javax.swing.JFormattedTextField(mascaraCartaoSus);
+        }
+        catch (Exception e){
+        }
         btnPesquisar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -68,17 +74,14 @@ public class FarmaciaGUI extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Receitas"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultas"));
 
         tblReceitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(tblReceitas);
@@ -153,6 +156,8 @@ public class FarmaciaGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.getAccessibleContext().setAccessibleName("Consultas");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -163,18 +168,22 @@ public class FarmaciaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void tblVisualizarReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tblVisualizarReceitaActionPerformed
-       
+
     }//GEN-LAST:event_tblVisualizarReceitaActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-         try {
+        try {
             Connection con = Conexao.abrirConexao();
-            FarmaciaDAO fd = new FarmaciaDAO(con);
-                     
-            fd.selectAll();
+            ConsultaDAO cd = new ConsultaDAO(con);
+            if (FarmaciaGUI.txtCartaoSUS.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Insira o número do cartão do SUS do paciente para continuar.");
+                return;
+            }
+            cd.buscarPeloCartaoSUS(FarmaciaGUI.txtCartaoSUS.getText());
+
             Conexao.fecharConexao(con);
             JOptionPane.showMessageDialog(this, "Pesquisa concluida!");
-            
+
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "Erro ao pesquisar receitas!");
@@ -206,10 +215,8 @@ public class FarmaciaGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FarmaciaGUI().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FarmaciaGUI().setVisible(true);
         });
     }
 

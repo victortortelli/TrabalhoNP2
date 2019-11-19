@@ -5,15 +5,45 @@
  */
 package Objetos;
 
-import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+
 
 /**
  *
  * @author guilherme
  */
 public class Consulta {
+
+    /**
+     * @return the crm_medico
+     */
+    public String getCrm_medico() {
+        return crm_medico;
+    }
+
+    /**
+     * @param crm_medico the crm_medico to set
+     */
+    public void setCrm_medico(String crm_medico) {
+        this.crm_medico = crm_medico;
+    }
+
+    /**
+     * @return the cartaoSus
+     */
+    public String getCartaoSus() {
+        return cartaoSus;
+    }
+
+    /**
+     * @param cartaoSus the cartaoSus to set
+     */
+    public void setCartaoSus(String cartaoSus) {
+        this.cartaoSus = cartaoSus;
+    }
 
     /**
      * @return the urgente
@@ -43,19 +73,6 @@ public class Consulta {
         this.data = data;
     }
 
-    /**
-     * @return the numero
-     */
-    public int getNumero() {
-        return numero;
-    }
-
-    /**
-     * @param numero the numero to set
-     */
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
 
 
     /**
@@ -86,14 +103,29 @@ public class Consulta {
         this.situacao = situacao;
     }
     
+    public int getNumero(){
+        return this.numero;
+    }
+    
+    /**
+     *
+     * @param numero
+     */
+    public void setNumero(int numero){
+        this.numero = numero;
+    }
     //private GregorianCalendar data;
     private Date data;
     private String hora; //ta pegando a hora no construtor
+    private String crm_medico;
+    private String cartaoSus;    
     private int situacao;//0 - fechado, 1 - em andamento e 2- aberto
     private int urgente;
     private int numero;
     
+    
     public Consulta(){
+        
         //--*
         //pegando a hora atual
         SimpleDateFormat sdf;
@@ -106,8 +138,7 @@ public class Consulta {
         cal.set(Calendar.SECOND,15);
         
         this.hora = sdf.format(cal.getTime());
-        //*--
-        
+       
     }
     
 }
