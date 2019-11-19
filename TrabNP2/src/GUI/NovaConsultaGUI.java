@@ -291,8 +291,8 @@ public class NovaConsultaGUI extends javax.swing.JFrame {
             cb.setSituacao(2);
 
             cd.novaConsulta(cb, pb);
-            Conexao.fecharConexao(con);
-            JOptionPane.showConfirmDialog(this, "Consulta criada com sucesso!");
+            Conexao.fecharConexao(con);            
+            JOptionPane.showMessageDialog(this, "Consulta criada com sucesso!");
 
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
             System.out.println(e.getMessage());

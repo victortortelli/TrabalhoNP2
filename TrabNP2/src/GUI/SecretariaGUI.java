@@ -61,7 +61,7 @@ public class SecretariaGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnListarUsuarios.setText("Listar Usuários");
+        btnListarUsuarios.setText("Listar Pacientes");
         btnListarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarUsuariosActionPerformed(evt);
@@ -75,7 +75,7 @@ public class SecretariaGUI extends javax.swing.JFrame {
             }
         });
 
-        btnCadastrarUsuario.setText("Cadastrar Usuário");
+        btnCadastrarUsuario.setText("Cadastrar Paciente");
         btnCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarUsuarioActionPerformed(evt);

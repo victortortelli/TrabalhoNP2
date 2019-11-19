@@ -237,26 +237,27 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
             // Sintaxe para formatação de data de acordo com o banco
             String text = txtDataConsulta.getText();
             char c = text.charAt(0);
-            if (c != ' '){
-            java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            java.time.LocalDate textFieldAsDate = java.time.LocalDate.parse(text, formatter);
-            java.sql.Date sqlDate = java.sql.Date.valueOf(textFieldAsDate);
-            System.out.println("tem coisa na data");
-            cd.buscarPelaData(sqlDate);
-        
+            if (c != ' ') {
+                java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                java.time.LocalDate textFieldAsDate = java.time.LocalDate.parse(text, formatter);
+                java.sql.Date sqlDate = java.sql.Date.valueOf(textFieldAsDate);
+
+                cd.buscarPelaData(sqlDate);
+
             } else {
-                System.out.println("nao tem coisa na data");
+
                 if (!ListarConsultaGUI.txtNumeroConsulta.getText().isBlank()) {
-                    System.out.println("tem coisa no numero");
+
                     int id = Integer.parseInt(ListarConsultaGUI.txtNumeroConsulta.getText());
                     cd.buscarPeloNumConsulta(id);
                 } else {
-                    System.out.println("nao tem coisa no numero");
+
                     cd.mostrarTudo();
                 }
             }
 
             Conexao.fecharConexao(con);
+            JOptionPane.showMessageDialog(this, "Pesquisa concluída!");
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "Erro ao buscar consulta!");
