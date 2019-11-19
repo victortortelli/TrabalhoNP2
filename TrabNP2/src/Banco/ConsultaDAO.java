@@ -20,10 +20,16 @@ import java.sql.Date;
  *
  * @author guilherme
  */
-public class ConsultaDAO extends DAO {
+public class ConsultaDAO{
+
+    private Connection con;
 
     public ConsultaDAO(Connection con) {
-        super(con);
+        this.con = con;
+    }
+
+    public Connection getCon() {
+        return this.con;
     }
 
     public String novaConsulta(Consulta consulta, Paciente paciente) {
