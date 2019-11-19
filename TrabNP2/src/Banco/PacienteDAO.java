@@ -61,6 +61,223 @@ public class PacienteDAO {
         }
     }
 
+    public String cadastroSemCPF(Paciente paciente) {
+        String sql = "INSERT INTO pacientes(cartao_sus,nome,nascimento,cor,deficiencia,sexo,rg,rua,bairro,numero,complemento,cidade,estado,ddd,telefone,escola) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, paciente.getCartaoSUS());
+            ps.setString(2, paciente.getNome());
+            ps.setDate(3, paciente.getDataNascMysql());
+            ps.setString(4, paciente.getCor());
+            ps.setString(5, paciente.getDificiencia());
+            ps.setString(6, paciente.getSexo());
+            ps.setString(7, paciente.getRg());
+            ps.setString(8, paciente.getEndereco());
+            ps.setString(9, paciente.getBairro());
+            ps.setString(10, paciente.getNumero());
+            ps.setString(11, paciente.getComplemento());
+            ps.setString(12, paciente.getCidade());
+            ps.setString(13, paciente.getEstado());
+            ps.setString(14, paciente.getDdd());
+            ps.setString(15, paciente.getTelefone());
+            ps.setString(16, paciente.getEscola());
+
+            if (ps.executeUpdate() > 0) {
+                return "Dados inseridos com sucesso!";
+            } else {
+                return "Erro ao inserir";
+            }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String cadastroSemComplemento(Paciente paciente) {
+        String sql = "INSERT INTO pacientes(cartao_sus,nome,cpf,nascimento,cor,deficiencia,sexo,rg,rua,bairro,numero,cidade,estado,ddd,telefone,escola) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, paciente.getCartaoSUS());
+            ps.setString(2, paciente.getNome());
+            ps.setString(3, paciente.getCpf());
+            ps.setDate(4, paciente.getDataNascMysql());
+            ps.setString(5, paciente.getCor());
+            ps.setString(6, paciente.getDificiencia());
+            ps.setString(7, paciente.getSexo());
+            ps.setString(8, paciente.getRg());
+            ps.setString(9, paciente.getEndereco());
+            ps.setString(10, paciente.getBairro());
+            ps.setString(11, paciente.getNumero());
+            ps.setString(12, paciente.getCidade());
+            ps.setString(13, paciente.getEstado());
+            ps.setString(14, paciente.getDdd());
+            ps.setString(15, paciente.getTelefone());
+            ps.setString(16, paciente.getEscola());
+
+            if (ps.executeUpdate() > 0) {
+                return "Dados inseridos com sucesso!";
+            } else {
+                return "Erro ao inserir";
+            }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String cadastroSemEscola(Paciente paciente) {
+        String sql = "INSERT INTO pacientes(cartao_sus,nome,cpf,nascimento,cor,deficiencia,sexo,rg,rua,bairro,numero,complemento,cidade,estado,ddd,telefone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, paciente.getCartaoSUS());
+            ps.setString(2, paciente.getNome());
+            ps.setString(3, paciente.getCpf());
+            ps.setDate(4, paciente.getDataNascMysql());
+            ps.setString(5, paciente.getCor());
+            ps.setString(6, paciente.getDificiencia());
+            ps.setString(7, paciente.getSexo());
+            ps.setString(8, paciente.getRg());
+            ps.setString(9, paciente.getEndereco());
+            ps.setString(10, paciente.getBairro());
+            ps.setString(11, paciente.getNumero());
+            ps.setString(12, paciente.getComplemento());
+            ps.setString(13, paciente.getCidade());
+            ps.setString(14, paciente.getEstado());
+            ps.setString(15, paciente.getDdd());
+            ps.setString(16, paciente.getTelefone());
+
+            if (ps.executeUpdate() > 0) {
+                return "Dados inseridos com sucesso!";
+            } else {
+                return "Erro ao inserir";
+            }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String cadastroSemCPFeComplemento(Paciente paciente) {
+        String sql = "INSERT INTO pacientes(cartao_sus,nome,nascimento,cor,deficiencia,sexo,rg,rua,bairro,numero,cidade,estado,ddd,telefone,escola) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, paciente.getCartaoSUS());
+            ps.setString(2, paciente.getNome());
+
+            ps.setDate(3, paciente.getDataNascMysql());
+            ps.setString(4, paciente.getCor());
+            ps.setString(5, paciente.getDificiencia());
+            ps.setString(6, paciente.getSexo());
+            ps.setString(7, paciente.getRg());
+            ps.setString(8, paciente.getEndereco());
+            ps.setString(9, paciente.getBairro());
+            ps.setString(10, paciente.getNumero());
+            ps.setString(11, paciente.getCidade());
+            ps.setString(12, paciente.getEstado());
+            ps.setString(13, paciente.getDdd());
+            ps.setString(14, paciente.getTelefone());
+            ps.setString(15, paciente.getEscola());
+
+            if (ps.executeUpdate() > 0) {
+                return "Dados inseridos com sucesso!";
+            } else {
+                return "Erro ao inserir";
+            }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String cadastroSemCPFeEscola(Paciente paciente) {
+        String sql = "INSERT INTO pacientes(cartao_sus,nome,nascimento,cor,deficiencia,sexo,rg,rua,bairro,numero,complemento,cidade,estado,ddd,telefone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, paciente.getCartaoSUS());
+            ps.setString(2, paciente.getNome());
+
+            ps.setDate(3, paciente.getDataNascMysql());
+            ps.setString(4, paciente.getCor());
+            ps.setString(5, paciente.getDificiencia());
+            ps.setString(6, paciente.getSexo());
+            ps.setString(7, paciente.getRg());
+            ps.setString(8, paciente.getEndereco());
+            ps.setString(9, paciente.getBairro());
+            ps.setString(10, paciente.getNumero());
+            ps.setString(11, paciente.getComplemento());
+            ps.setString(12, paciente.getCidade());
+            ps.setString(13, paciente.getEstado());
+            ps.setString(14, paciente.getDdd());
+            ps.setString(15, paciente.getTelefone());
+  
+
+            if (ps.executeUpdate() > 0) {
+                return "Dados inseridos com sucesso!";
+            } else {
+                return "Erro ao inserir";
+            }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String cadastroSemComplementoeEscola(Paciente paciente) {
+        String sql = "INSERT INTO pacientes(cartao_sus,nome,cpf,nascimento,cor,deficiencia,sexo,rg,rua,bairro,numero,cidade,estado,ddd,telefone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, paciente.getCartaoSUS());
+            ps.setString(2, paciente.getNome());
+            ps.setString(3, paciente.getCpf());
+            ps.setDate(4, paciente.getDataNascMysql());
+            ps.setString(5, paciente.getCor());
+            ps.setString(6, paciente.getDificiencia());
+            ps.setString(7, paciente.getSexo());
+            ps.setString(8, paciente.getRg());
+            ps.setString(9, paciente.getEndereco());
+            ps.setString(10, paciente.getBairro());
+            ps.setString(11, paciente.getNumero());
+            ps.setString(12, paciente.getCidade());
+            ps.setString(13, paciente.getEstado());
+            ps.setString(14, paciente.getDdd());
+            ps.setString(15, paciente.getTelefone());
+
+
+            if (ps.executeUpdate() > 0) {
+                return "Dados inseridos com sucesso!";
+            } else {
+                return "Erro ao inserir";
+            }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String cadastroSemComplementoeEscolaeCPF(Paciente paciente) {
+        String sql = "INSERT INTO pacientes(cartao_sus,nome,nascimento,cor,deficiencia,sexo,rg,rua,bairro,numero,cidade,estado,ddd,telefone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, paciente.getCartaoSUS());
+            ps.setString(2, paciente.getNome());
+            ps.setDate(3, paciente.getDataNascMysql());
+            ps.setString(4, paciente.getCor());
+            ps.setString(5, paciente.getDificiencia());
+            ps.setString(6, paciente.getSexo());
+            ps.setString(7, paciente.getRg());
+            ps.setString(8, paciente.getEndereco());
+            ps.setString(9, paciente.getBairro());
+            ps.setString(10, paciente.getNumero());
+            ps.setString(11, paciente.getCidade());
+            ps.setString(12, paciente.getEstado());
+            ps.setString(13, paciente.getDdd());
+            ps.setString(14, paciente.getTelefone());
+
+
+            if (ps.executeUpdate() > 0) {
+                return "Dados inseridos com sucesso!";
+            } else {
+                return "Erro ao inserir";
+            }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
+
     public String update(Paciente paciente) {
         String sql = "UPDATE paciente SET cpf = ?, nome = ?, WHERE cartaosus = ?";
         try {

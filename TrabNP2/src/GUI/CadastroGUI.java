@@ -527,6 +527,30 @@ public class CadastroGUI extends javax.swing.JFrame {
         return sexo;
     }
 
+    private int confereCampos() {
+
+        if (txtCpf.getText().isBlank() == false && txtComplemento.getText().isBlank() == false && txtEscola.getText().isBlank() == false) {
+            return 1;
+        } else if (txtCpf.getText().isBlank() == true && txtComplemento.getText().isBlank() == false && txtEscola.getText().isBlank() == false) {
+            return 2;
+        } else if (txtCpf.getText().isBlank() == false && txtComplemento.getText().isBlank() == true && txtEscola.getText().isBlank() == false) {
+            return 3;
+        } else if (txtCpf.getText().isBlank() == false && txtComplemento.getText().isBlank() == false && txtEscola.getText().isBlank() == true) {
+            return 4;
+        } else if (txtCpf.getText().isBlank() == true && txtComplemento.getText().isBlank() == true && txtEscola.getText().isBlank() == false) {
+            return 5;
+        } else if (txtCpf.getText().isBlank() == true && txtComplemento.getText().isBlank() == false && txtEscola.getText().isBlank() == true) {
+            return 6;
+        } else if (txtCpf.getText().isBlank() == false && txtComplemento.getText().isBlank() == true && txtEscola.getText().isBlank() == true) {
+            return 7;
+        } else if (txtCpf.getText().isBlank() == true && txtComplemento.getText().isBlank() == true && txtEscola.getText().isBlank() == true) {
+            return 8;
+        }
+
+        return 0;
+
+    }
+
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         int dadosVal = dadosValidados();
@@ -573,10 +597,33 @@ public class CadastroGUI extends javax.swing.JFrame {
                 pb.setDdd(ddd);
                 //FIM
 
-                pd.insert(pb);
+                int cc = confereCampos();
+                switch (cc) {
+                    case 1:
+                        pd.insert(pb);
+                        break;
+                    case 2:
+                        pd.cadastroSemCPF(pb);
+                        break;
+                    case 3:
+                        pd.cadastroSemComplemento(pb);
+                        break;
+                    case 4:
+                        pd.cadastroSemEscola(pb);
+                    case 5:
+                        pd.cadastroSemCPFeComplemento(pb);
+                    case 6:
+                        pd.cadastroSemCPFeEscola(pb);
+                    case 7:
+                        pd.cadastroSemComplementoeEscola(pb);
+                    case 8:
+                        pd.cadastroSemComplementoeEscolaeCPF(pb);
+                    default:
+                        break;
+                }
                 Conexao.fecharConexao(con);
                 JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!");
-                
+
                 this.dispose();
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
                 System.out.println(e.getMessage());

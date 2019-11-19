@@ -1,7 +1,7 @@
 Em CadastroGUI()
 - Botão não funcionando (Victor) OK
 - Não cadastrando (Pupo) -- OK
-- Criar os if´s caso algum campo (null) não seja preenchido.
+- Criar os if´s caso algum campo (null) não seja preenchido. OK
 
 Em ListarUsuarios()
 - Mudar nome das colunas -- OK
