@@ -175,7 +175,7 @@ public class FarmaciaGUI extends javax.swing.JFrame {
         try {
             Connection con = Conexao.abrirConexao();
             ConsultaDAO cd = new ConsultaDAO(con);
-            if (FarmaciaGUI.txtCartaoSUS.getText().isBlank()) {
+            if (FarmaciaGUI.txtCartaoSUS.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Insira o número do cartão do SUS do paciente para continuar.");
                 return;
             }
