@@ -224,7 +224,7 @@ public class ListarConsultaGUI extends javax.swing.JFrame {
 
             } else {
 
-                if (!ListarConsultaGUI.txtNumeroConsulta.getText().isBlank()) {
+                if (!ListarConsultaGUI.txtNumeroConsulta.getText().isEmpty()) {
 
                     int id = Integer.parseInt(ListarConsultaGUI.txtNumeroConsulta.getText());
                     cd.buscarPeloNumConsulta(id);

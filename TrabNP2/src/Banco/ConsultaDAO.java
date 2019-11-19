@@ -150,7 +150,7 @@ public class ConsultaDAO {
         }
     }
     
-    public Paciente melhorConsulta(){
+    public void melhorConsulta(){
         String sql = "select c.id, p.nome,p.cartao_sus,p.nascimento,c.urgencia  from consulta c, pacientes p where c.cartao_sus_pacientes = p.cartao_sus AND c.cstatus = 2 order by c.id AND c.urgencia;";
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);                       
