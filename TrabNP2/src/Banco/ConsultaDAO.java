@@ -20,7 +20,7 @@ import java.sql.Date;
  *
  * @author guilherme
  */
-public class ConsultaDAO{
+public class ConsultaDAO {
 
     private Connection con;
 
@@ -71,32 +71,16 @@ public class ConsultaDAO{
         return null;
     }
 
-    public Consulta buscarPaciente(String cartaoSUS) {
-        String sql = "SELECT p.nome,p.rg,p.dataNasc,MAX(c.id) FROM paciente p, consulta c WHERE p.cartaoSUS = ?;";
-        try {
-            PreparedStatement ps = this.getCon().prepareStatement(sql);
 
-            ps.setString(1, cartaoSUS);
-
-            ResultSet rs = ps.executeQuery();
-
-            Consulta c = new Consulta();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-        return null;
-    }
 
     public void mostrarTudo() {
 
         String sql = "SELECT p.nome AS 'Nome', c.urgencia AS 'Urgência', c.id AS 'Nº da Consulta', c.cstatus AS 'Status' FROM pacientes p, consulta c WHERE p.cartao_sus = c.cartao_sus_pacientes;";
-        System.out.println(sql);
+       
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
+
             ListarConsultaGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
 
         } catch (SQLException e) {
@@ -126,10 +110,53 @@ public class ConsultaDAO{
 
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
-            ps.setDate(1, data);
-            System.out.println(sql);
+            ps.setDate(1, data);            
             ResultSet rs = ps.executeQuery();
             ListarConsultaGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void mostrarHistoricoMedico(String crm) {
+
+        String sql = "SELECT c.id AS 'Nº da Consulta',p.nome AS 'Nome', c.data AS 'Data', c.diagnostico AS 'Diagnóstico' FROM pacientes p, consulta c, medicos m WHERE p.cartao_sus = c.cartao_sus_pacientes AND c.crm_medico = m.crm AND m.crm = ? ORDER BY c.id DESC;";
+        
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, crm);
+            ResultSet rs = ps.executeQuery();
+
+            GUI.MedicoGUI.tblHistorico.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void buscarPeloCartaoSUSFarmacia(String cartaoSus) {
+        String sql = "SELECT p.nome AS 'Nome', c.data AS 'Data' FROM pacientes p, consulta c WHERE p.cartao_sus = ? AND p.cartao_sus = c.cartao_sus_pacientes AND c.cstatus = 0 ORDER BY c.id DESC;";
+
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, cartaoSus);            
+            ResultSet rs = ps.executeQuery();
+            ListarConsultaGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public Paciente melhorConsulta(){
+        String sql = "select c.id, p.nome,p.cartao_sus,p.nascimento,c.urgencia  from consulta c, pacientes p where c.cartao_sus_pacientes = p.cartao_sus AND c.cstatus = 2 order by c.id AND c.urgencia;";
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);                       
+            ResultSet rs = ps.executeQuery();
+            Paciente pp;
+            
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

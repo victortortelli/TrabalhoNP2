@@ -179,7 +179,7 @@ public class FarmaciaGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Insira o número do cartão do SUS do paciente para continuar.");
                 return;
             }
-          //  cd.buscarPeloCartaoSUS(FarmaciaGUI.txtCartaoSUS.getText());
+            cd.buscarPeloCartaoSUSFarmacia(txtCartaoSUS.getText());
 
             Conexao.fecharConexao(con);
             JOptionPane.showMessageDialog(this, "Pesquisa concluida!");
