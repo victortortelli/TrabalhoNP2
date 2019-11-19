@@ -7,6 +7,10 @@ ATENÇÃO: Pessoal, quando forem testar o programa nunca se esqueçam de conferi
 Sempre que for fazer mudanças, abra um novo branch no git para evitarmos conflito no master (git checkout -b nome_do_branch)
 ============================================================================================================================
 
+update victortortelli 19/11/19
+---
+- Todos os ifs prontos no CadastroGUI() para os campos que poderão ser deixados em branco.
+
 update victortortelli 18/11/19
 ---
 - ListarConsultaGUI funcionando totalmente, se buscar por consulta sem preencher o campo de data e nem o numero da consulta, retorna
