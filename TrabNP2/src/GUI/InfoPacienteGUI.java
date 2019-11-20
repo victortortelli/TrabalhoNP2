@@ -31,9 +31,9 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         this.txtCpf.setText(empty);
         this.txtDataNascimento.setText(empty);
         this.txtEscola.setText(empty);
-        this.cmbEstado.setSelectedIndex(0);
+        /*this.cmbEstado.setSelectedIndex(0);
         this.cmbDeficiencia.setSelectedIndex(0);
-        this.cmbRaca.setSelectedIndex(0);
+        this.cmbRaca.setSelectedIndex(0);*/
         this.txtNaturalidade.setText(empty);
         this.txtNome.setText(empty);
         this.txtNumero.setText(empty);
@@ -477,7 +477,7 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         return 0;
     }
 
-    private String SelecionaSexo() {
+    /*private String SelecionaSexo() {
         String sexo = "";
         if (radioMasculino.isSelected()) {
             sexo = radioMasculino.getText();
@@ -485,7 +485,7 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
             sexo = radioFeminino.getText();
         }
         return sexo;
-    }
+    }*/
 
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -505,9 +505,9 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                 //Fim
 
                 //Cria uma string com a opção marcada dentro da combobox
-                String uf = (String) cmbEstado.getSelectedItem();
+                /*String uf = (String) cmbEstado.getSelectedItem();
                 String deficiencia = (String) cmbDeficiencia.getSelectedItem();
-                String cor = (String) cmbRaca.getSelectedItem();
+                String cor = (String) cmbRaca.getSelectedItem();*/
                 //fim
 
                 pb.setNome(txtNome.getText());
@@ -522,10 +522,10 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                 pb.setNumero(txtNumero.getText());
                 pb.setTelefone(txtTelefone.getText());
                 pb.setEscola(txtEscola.getText());
-                pb.setEstado(uf);
+                /*pb.setEstado(uf);
                 pb.setDificiencia(deficiencia);
                 pb.setCor(cor);
-                pb.setSexo(SelecionaSexo());
+                pb.setSexo(SelecionaSexo());*/
 
                 //Criando uma string com apenas o DDD e setando no banco
                 String ddd = "";
