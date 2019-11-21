@@ -438,7 +438,7 @@ public class PacienteDAO {
             dia+=datac[j];
         }
         
-        if(Integer.parseInt(dia)<10){
+        if(dia.length()==1){
             String aux = dia;
             dia="0";
             dia+=aux;
