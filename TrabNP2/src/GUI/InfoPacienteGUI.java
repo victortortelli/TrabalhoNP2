@@ -21,17 +21,37 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
     /**
      * Creates new form Tela_Secretaria
      */
-
-
-
+    boolean permite_atualizar = false;
 
     public InfoPacienteGUI() {
 
         initComponents();
-        this.setLocationRelativeTo(null);       
-        
+        this.setLocationRelativeTo(null);
+        desabilitaCampos(false);
+
     }
-    
+
+    public void desabilitaCampos(boolean i) {
+        txtNome.setEditable(i);
+        txtCartaoSus.setEditable(false);
+        txtCpf.setEditable(i);
+        txtBairro.setEditable(i);
+        txtCidade.setEditable(i);
+        txtComplemento.setEditable(i);
+        txtRua.setEditable(i);
+        txtRg.setEditable(i);
+        txtNumero.setEditable(i);
+        txtTelefone.setEditable(i);
+        txtEscola.setEditable(i);
+        txtDataNascimento.setEditable(i);
+        txtNaturalidade.setEditable(i);
+        txtProfissao.setEditable(i);
+        cmbRaca.setEnabled(i);
+        cmbDeficiencia.setEnabled(i);
+        cmbEstado.setEnabled(i);
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,7 +69,6 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         txtComplemento = new javax.swing.JTextField();
         lblBairro = new javax.swing.JLabel();
         txtBairro = new javax.swing.JTextField();
-        txtCidade = new javax.swing.JTextField();
         lblEstado = new javax.swing.JLabel();
         txtNumero = new javax.swing.JTextField();
         txtRua = new javax.swing.JTextField();
@@ -66,7 +85,8 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         }
         catch (Exception e){
         }
-        txtEstado = new javax.swing.JTextField();
+        cmbEstado = new javax.swing.JComboBox<>();
+        txtCidade = new javax.swing.JTextField();
         panelDadosPessoais = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
@@ -88,12 +108,12 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         catch (Exception e){
         }
         txtDataNascimento = new javax.swing.JFormattedTextField();
-        try{
-            javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter("##/##/####");
-            this.txtDataNascimento = new javax.swing.JFormattedTextField(mascaraData);
-        }
-        catch (Exception e){
-        }
+        //try{
+            //javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter("##/##/####");
+            //this.txtDataNascimento = new javax.swing.JFormattedTextField(mascaraData);
+            //}
+        //catch (Exception e){
+            //}
         txtCpf = new javax.swing.JFormattedTextField();
         try{
             javax.swing.text.MaskFormatter mascaraCpf= new javax.swing.text.MaskFormatter("###.###.###-##");
@@ -103,13 +123,14 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         }
         jLabel6 = new javax.swing.JLabel();
         txtRg = new javax.swing.JTextField();
-        txtSexo = new javax.swing.JTextField();
-        txtRaca = new javax.swing.JTextField();
-        txtDeficiencia = new javax.swing.JTextField();
-        btnCadastrar = new javax.swing.JButton();
+        radioMasculino = new javax.swing.JRadioButton();
+        radioFeminino = new javax.swing.JRadioButton();
+        cmbRaca = new javax.swing.JComboBox<>();
+        cmbDeficiencia = new javax.swing.JComboBox<>();
+        btnAtualizar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        ckbAlterar = new javax.swing.JCheckBox();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -146,6 +167,8 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
             }
         });
 
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+
         javax.swing.GroupLayout panelEnderecoLayout = new javax.swing.GroupLayout(panelEndereco);
         panelEndereco.setLayout(panelEnderecoLayout);
         panelEnderecoLayout.setHorizontalGroup(
@@ -161,16 +184,16 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtEscola, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                    .addComponent(txtCidade, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtNumero, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtRua)
-                    .addComponent(txtTelefone))
+                    .addComponent(txtTelefone)
+                    .addComponent(txtCidade))
                 .addGap(35, 35, 35)
                 .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelEnderecoLayout.createSequentialGroup()
                         .addComponent(lblEstado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelEnderecoLayout.createSequentialGroup()
                         .addComponent(lblComplemento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -197,19 +220,21 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                     .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblComplemento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEstado)
-                    .addComponent(lblCidade)
-                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTelefone)
-                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEscola, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEscola))
+                .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelEnderecoLayout.createSequentialGroup()
+                        .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEstado)
+                            .addComponent(lblCidade)
+                            .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTelefone)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEscola, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEscola)))
+                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
@@ -253,12 +278,20 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
 
         jLabel6.setText("RG/CN:");
 
+        radioMasculino.setText("Masculino");
+
+        radioFeminino.setText("Feminino");
+
+        cmbRaca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nenhum", "Branca", "Parda", "Negra", "Amarela", "Indígena", " " }));
+
+        cmbDeficiencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nenhuma", "Visual", "Auditiva", "Mental", "Física", "Múltipla" }));
+
         javax.swing.GroupLayout panelDadosPessoaisLayout = new javax.swing.GroupLayout(panelDadosPessoais);
         panelDadosPessoais.setLayout(panelDadosPessoaisLayout);
         panelDadosPessoaisLayout.setHorizontalGroup(
             panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosPessoaisLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNaturalidade, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblDataNascimento, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -285,17 +318,15 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                                .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 94, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosPessoaisLayout.createSequentialGroup()
-                                .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtDeficiencia, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtRaca, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtSexo, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(96, 96, 96))))
-                    .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                        .addComponent(txtNome)
+                            .addComponent(radioMasculino)
+                            .addComponent(cmbRaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbDeficiencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 95, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosPessoaisLayout.createSequentialGroup()
+                        .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(radioFeminino)
+                            .addComponent(txtNome))
                         .addGap(96, 96, 96))))
         );
         panelDadosPessoaisLayout.setVerticalGroup(
@@ -310,19 +341,20 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                     .addComponent(lblDataNascimento)
                     .addComponent(jLabel1)
                     .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(radioMasculino)
+                    .addComponent(radioFeminino))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNaturalidade)
                     .addComponent(txtNaturalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(txtRaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbRaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel2)
                     .addComponent(txtProfissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDeficiencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbDeficiencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCPF)
@@ -336,10 +368,10 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        btnCadastrar.setText("Atualizar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
+                btnAtualizarActionPerformed(evt);
             }
         });
 
@@ -355,10 +387,10 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("INFORMAÇÕES DO PACIENTE");
 
-        jCheckBox1.setText("Alterar Informações?");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        ckbAlterar.setText("Alterar Informações?");
+        ckbAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                ckbAlterarActionPerformed(evt);
             }
         });
 
@@ -369,23 +401,24 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addGap(152, 152, 152)
-                .addComponent(jCheckBox1)
+                .addGap(89, 89, 89)
+                .addComponent(ckbAlterar)
                 .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(202, 202, 202)
-                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addGap(98, 98, 98)
+                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(193, 193, 193))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 730, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(panelDadosPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,7 +426,7 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jCheckBox1))
+                    .addComponent(ckbAlterar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -401,7 +434,7 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -462,7 +495,6 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         return 0;
     }
 
-
 //    private String SelecionaSexo() {
 //        String sexo = "";
 //        if (radioMasculino.isSelected()) {
@@ -472,90 +504,99 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
 //        }
 //        return sexo;
 //    }
+    private String SelecionaSexo() {
+        String sexo = "";
+        if (radioMasculino.isSelected()) {
+            sexo = radioMasculino.getText();
+        } else if (radioFeminino.isSelected()) {
+            sexo = radioFeminino.getText();
+        }
+        return sexo;
+    }
+    
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        if (permite_atualizar == true) {
+            int dadosVal = dadosValidados();
 
+            if (dadosVal == 0) {
+                try {
+                    Connection con = Conexao.abrirConexao();
+                    Paciente pb = new Paciente();
+                    PacienteDAO pd = new PacienteDAO(con);
 
+                    // Sintaxe para formatação de data de nascimento de acordo com o banco
+                    String text = txtDataNascimento.getText();
+                    java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    java.time.LocalDate textFieldAsDate = java.time.LocalDate.parse(text, formatter);
+                    java.sql.Date sqlDate = java.sql.Date.valueOf(textFieldAsDate);
+                    //Fim
 
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        int dadosVal = dadosValidados();
+                    //Cria uma string com a opção marcada dentro da combobox
+                    String uf = (String) cmbEstado.getSelectedItem();
+                    String deficiencia = (String) cmbDeficiencia.getSelectedItem();
+                    String cor = (String) cmbRaca.getSelectedItem();
+                    //fim
+                    
+                    pb.setNome(txtNome.getText());
+                    pb.setCartaoSUS(txtCartaoSus.getText());
+                    pb.setCpf(txtCpf.getText());
+                    pb.setBairro(txtBairro.getText());
+                    pb.setCidade(txtCidade.getText());
+                    pb.setComplemento(txtComplemento.getText());
+                    pb.setEndereco(txtRua.getText());
+                    pb.setDataNascMysql(sqlDate);
+                    pb.setRg(txtRg.getText());
+                    pb.setNumero(txtNumero.getText());
+                    pb.setTelefone(txtTelefone.getText());
+                    pb.setEscola(txtEscola.getText());
 
-        if (dadosVal == 0) {
-            try {
-                Connection con = Conexao.abrirConexao();
-                Paciente pb = new Paciente();
-                PacienteDAO pd = new PacienteDAO(con);
+                    pb.setEstado(uf);
+                    pb.setDificiencia(deficiencia);
+                    pb.setCor(cor);
+                    pb.setSexo(SelecionaSexo());
+                    
+                    pb.setNaturalidade(txtNaturalidade.getText());
+                    pb.setProfissao(txtProfissao.getText());
+                    
+                    //Criando uma string com apenas o DDD e setando no banco
+                    String ddd = "";
+                    ddd = pb.getTelefone().substring(1, 3);
+                    pb.setDdd(ddd);
+                    //FIM
 
-                // Sintaxe para formatação de data de nascimento de acordo com o banco
-                String text = txtDataNascimento.getText();
-                java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                java.time.LocalDate textFieldAsDate = java.time.LocalDate.parse(text, formatter);
-                java.sql.Date sqlDate = java.sql.Date.valueOf(textFieldAsDate);
-                //Fim
+                    pd.update(pb);
+                    Conexao.fecharConexao(con);
+                    JOptionPane.showMessageDialog(this, "Paciente atualizado com sucesso!");
 
+                    this.dispose();
+                } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
+                    System.out.println(e.getMessage());
+                    JOptionPane.showMessageDialog(this, "Erro ao atualizar paciente!");
+                }
+            } else {
+                switch (dadosVal) {
+                    case 1:
+                        JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": Nome é inválido");
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": Naturalidade é inválida");
+                        break;
+                    case 3:
+                        JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": Profissão é inválida");
+                        break;
+                    case 4:
+                        JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": CPF é inválido");
+                        break;
+                    case 5:
+                        JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": Cartão do SUS é inválido");
+                        break;
+                }
 
-//                //Cria uma string com a opção marcada dentro da combobox
-//                String uf = (String) cmbEstado.getSelectedItem();
-//                String deficiencia = (String) cmbDeficiencia.getSelectedItem();
-//                String cor = (String) cmbRaca.getSelectedItem();
-//                //fim
-
-
-                pb.setNome(txtNome.getText());
-                pb.setCartaoSUS(txtCartaoSus.getText());
-                pb.setCpf(txtCpf.getText());
-                pb.setBairro(txtBairro.getText());
-                pb.setCidade(txtCidade.getText());
-                pb.setComplemento(txtComplemento.getText());
-                pb.setEndereco(txtRua.getText());
-                pb.setDataNascMysql(sqlDate);
-                pb.setRg(txtRg.getText());
-                pb.setNumero(txtNumero.getText());
-                pb.setTelefone(txtTelefone.getText());
-                pb.setEscola(txtEscola.getText());
-
-//                pb.setEstado(uf);
-//                pb.setDificiencia(deficiencia);
-//                pb.setCor(cor);
-//                pb.setSexo(SelecionaSexo());
-
-
-                //Criando uma string com apenas o DDD e setando no banco
-                String ddd = "";
-                ddd = pb.getTelefone().substring(1, 3);
-                pb.setDdd(ddd);
-                //FIM
-
-                pd.insert(pb);
-                Conexao.fecharConexao(con);
-                JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!");
-                
-                this.dispose();
-            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
-                System.out.println(e.getMessage());
-                JOptionPane.showMessageDialog(this, "Erro ao cadastrar paciente!");
-            }
-        } else {
-            switch (dadosVal) {
-                case 1:
-                    JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": Nome é inválido");
-                    break;
-                case 2:
-                    JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": Naturalidade é inválida");
-                    break;
-                case 3:
-                    JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": Profissão é inválida");
-                    break;
-                case 4:
-                    JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": CPF é inválido");
-                    break;
-                case 5:
-                    JOptionPane.showMessageDialog(this, "Erro " + dadosVal + ": Cartão do SUS é inválido");
-                    break;
             }
 
         }
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
-
-    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void txtTelefoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTelefoneMouseClicked
         txtTelefone.setCaretPosition(1);
@@ -573,9 +614,11 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         txtCartaoSus.setCaretPosition(0);
     }//GEN-LAST:event_txtCartaoSusMouseClicked
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void ckbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbAlterarActionPerformed
+        desabilitaCampos(true);
+        permite_atualizar = true;
 
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_ckbAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -619,9 +662,12 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox ckbAlterar;
+    public static javax.swing.JComboBox<String> cmbDeficiencia;
+    public static javax.swing.JComboBox<String> cmbEstado;
+    public static javax.swing.JComboBox<String> cmbRaca;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -646,23 +692,21 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblTelefone;
     private javax.swing.JPanel panelDadosPessoais;
     private javax.swing.JPanel panelEndereco;
+    public static javax.swing.JRadioButton radioFeminino;
+    public static javax.swing.JRadioButton radioMasculino;
     public static javax.swing.JTextField txtBairro;
     public static javax.swing.JFormattedTextField txtCartaoSus;
     public static javax.swing.JTextField txtCidade;
     public static javax.swing.JTextField txtComplemento;
     public static javax.swing.JFormattedTextField txtCpf;
     public static javax.swing.JFormattedTextField txtDataNascimento;
-    public static javax.swing.JTextField txtDeficiencia;
     public static javax.swing.JTextField txtEscola;
-    public static javax.swing.JTextField txtEstado;
     public static javax.swing.JTextField txtNaturalidade;
     public static javax.swing.JTextField txtNome;
     public static javax.swing.JTextField txtNumero;
     public static javax.swing.JTextField txtProfissao;
-    public static javax.swing.JTextField txtRaca;
     public static javax.swing.JTextField txtRg;
     public static javax.swing.JTextField txtRua;
-    public static javax.swing.JTextField txtSexo;
     public static javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }
