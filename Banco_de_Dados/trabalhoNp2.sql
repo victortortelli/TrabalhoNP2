@@ -38,7 +38,7 @@ foreign key (id_profissionais) references profissionais(id));
 
 create table consulta(
 id int primary key auto_increment,
-crm_medico varchar(16) unique,
+crm_medico varchar(16),
 cartao_sus_pacientes varchar(20),
 data date not null,
 cstatus tinyint not null,
@@ -66,7 +66,11 @@ CREATE USER 'vitao'@'localhost' IDENTIFIED BY 'victor';
 grant select on trabalhoNp2.* to vitao@localhost;
 
 -- select * from consulta;
--- select * from pacientes;
+ select * from pacientes;
+ 
+ UPDATE pacientes SET nome = 'Guilherme', nascimento = '1996-9-2' WHERE cartao_sus = '616 1616 5151 3212';
+ 
+ 
 
 -- insert into teste values (CURDATE(), CURTIME(), NOW());
 
@@ -74,6 +78,7 @@ grant select on trabalhoNp2.* to vitao@localhost;
 
 -- se nao quiser apagar a table consulta só da esse alter table que ta tudo certo
 -- alter table consulta add diagnosticos varchar(400);
+-- alter table pacientes add (naturalidade varchar(30), profissao varchar(30));
 
  -- select c.id, p.nome,p.cartao_sus,p.nascimento,c.urgencia  from consulta c, pacientes p where c.cartao_sus_pacientes = p.cartao_sus AND c.cstatus = 2 order by c.id AND c.urgencia;
 

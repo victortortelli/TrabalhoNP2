@@ -590,6 +590,8 @@ public class CadastroGUI extends javax.swing.JFrame {
                 pb.setDificiencia(deficiencia);
                 pb.setCor(cor);
                 pb.setSexo(SelecionaSexo());
+                pb.setNaturalidade(txtNaturalidade.getText());
+                pb.setProfissao(txtProfissao.getText());
 
                 //Criando uma string com apenas o DDD e setando no banco
                 String ddd = "";
