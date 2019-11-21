@@ -76,9 +76,10 @@ public class FarmaciaGUI extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultas"));
 
+        tblReceitas.setAutoCreateRowSorter(true);
         tblReceitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {}
             },
             new String [] {
 
@@ -156,8 +157,6 @@ public class FarmaciaGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.getAccessibleContext().setAccessibleName("Consultas");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -175,10 +174,11 @@ public class FarmaciaGUI extends javax.swing.JFrame {
         try {
             Connection con = Conexao.abrirConexao();
             ConsultaDAO cd = new ConsultaDAO(con);
-            if (FarmaciaGUI.txtCartaoSUS.getText().isEmpty()) {
+            if (FarmaciaGUI.txtCartaoSUS.getText().isBlank()) {
                 JOptionPane.showMessageDialog(this, "Insira o número do cartão do SUS do paciente para continuar.");
                 return;
             }
+            
             cd.buscarPeloCartaoSUSFarmacia(txtCartaoSUS.getText());
             
             Conexao.fecharConexao(con);
