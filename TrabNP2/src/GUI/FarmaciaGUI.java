@@ -167,7 +167,27 @@ public class FarmaciaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void tblVisualizarReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tblVisualizarReceitaActionPerformed
+        int linha;
+        int nConsulta;
 
+        try {
+            Connection con = Conexao.abrirConexao();
+            ConsultaDAO cd = new ConsultaDAO(con);
+            linha = tblReceitas.getSelectedRow();
+            nConsulta = Integer.parseInt(tblReceitas.getValueAt(linha, 1).toString());
+            cd.mostrarReceitaFarmacia(nConsulta);
+
+            Conexao.fecharConexao(con);
+        } catch (Exception e) {
+            nConsulta = 0;
+            System.out.println(e.getMessage());
+        }
+
+        if (nConsulta == 0) {
+            JOptionPane.showMessageDialog(this, "Receita não encontrada!");
+        }
+
+        
     }//GEN-LAST:event_tblVisualizarReceitaActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -178,9 +198,9 @@ public class FarmaciaGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Insira o número do cartão do SUS do paciente para continuar.");
                 return;
             }
-            
+
             cd.buscarPeloCartaoSUSFarmacia(txtCartaoSUS.getText());
-            
+
             Conexao.fecharConexao(con);
             JOptionPane.showMessageDialog(this, "Pesquisa concluida!");
 
