@@ -22,6 +22,9 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
      * Creates new form Tela_Secretaria
      */
 
+
+
+
     public InfoPacienteGUI() {
 
         initComponents();
@@ -459,6 +462,7 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         return 0;
     }
 
+
 //    private String SelecionaSexo() {
 //        String sexo = "";
 //        if (radioMasculino.isSelected()) {
@@ -468,6 +472,7 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
 //        }
 //        return sexo;
 //    }
+
 
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -486,11 +491,13 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                 java.sql.Date sqlDate = java.sql.Date.valueOf(textFieldAsDate);
                 //Fim
 
+
 //                //Cria uma string com a opção marcada dentro da combobox
 //                String uf = (String) cmbEstado.getSelectedItem();
 //                String deficiencia = (String) cmbDeficiencia.getSelectedItem();
 //                String cor = (String) cmbRaca.getSelectedItem();
 //                //fim
+
 
                 pb.setNome(txtNome.getText());
                 pb.setCartaoSUS(txtCartaoSus.getText());
@@ -504,10 +511,12 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                 pb.setNumero(txtNumero.getText());
                 pb.setTelefone(txtTelefone.getText());
                 pb.setEscola(txtEscola.getText());
+
 //                pb.setEstado(uf);
 //                pb.setDificiencia(deficiencia);
 //                pb.setCor(cor);
 //                pb.setSexo(SelecionaSexo());
+
 
                 //Criando uma string com apenas o DDD e setando no banco
                 String ddd = "";
