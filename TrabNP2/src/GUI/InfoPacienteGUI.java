@@ -108,12 +108,12 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         catch (Exception e){
         }
         txtDataNascimento = new javax.swing.JFormattedTextField();
-        //try{
-            //javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter("##/##/####");
-            //this.txtDataNascimento = new javax.swing.JFormattedTextField(mascaraData);
-            //}
-        //catch (Exception e){
-            //}
+        /*try{
+            javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter("##/##/####");
+            this.txtDataNascimento = new javax.swing.JFormattedTextField(mascaraData);
+        }
+        catch (Exception e){
+        }*/
         txtCpf = new javax.swing.JFormattedTextField();
         try{
             javax.swing.text.MaskFormatter mascaraCpf= new javax.swing.text.MaskFormatter("###.###.###-##");
@@ -413,12 +413,9 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(panelDadosPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addComponent(panelEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelDadosPessoais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

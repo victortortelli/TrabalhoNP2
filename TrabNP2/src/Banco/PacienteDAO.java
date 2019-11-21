@@ -317,7 +317,7 @@ public class PacienteDAO {
             ps.setString(18, paciente.getProfissao());
             ps.setString(19, paciente.getCartaoSUS());
             
-            System.out.println(ps);
+            
 
             if (ps.executeUpdate() > 0) {
                 return "Dado atualizado com sucesso! (cpf e nome)";
@@ -389,8 +389,7 @@ public class PacienteDAO {
 
         String sql = "SELECT nome AS 'Nome', rg AS 'RG', cartao_sus AS 'Nº Cartão SUS' FROM pacientes;";
         try {
-            PreparedStatement ps = this.getCon().prepareStatement(sql);
-            System.out.println(sql);
+            PreparedStatement ps = this.getCon().prepareStatement(sql);            
             ResultSet rs = ps.executeQuery();
             ListarUsuariosGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
 
@@ -398,6 +397,61 @@ public class PacienteDAO {
             System.out.println(e.getMessage());
 
         }
+    }
+    
+    private String corrigirData(String data){
+        String dataCorrigida="";
+        String dia="";
+        String mes="";
+        String ano="";
+        
+        char datac[] = data.toCharArray();
+        
+        int i=0;
+        int anterior=i;
+        while(Character.isDigit(datac[i])){
+            i++;
+        }       
+        for(int j=anterior;j<i;j++){
+            ano+=datac[j];
+        }        
+        
+        while(!Character.isDigit(datac[i])){
+            i++;
+        }
+        anterior=i;
+        while(Character.isDigit(datac[i])){
+            i++;
+        }
+        for(int j=anterior;j<i;j++){
+            mes+=datac[j];
+        }
+        
+        while(!Character.isDigit(datac[i])){
+            i++;
+        }
+        anterior=i;
+        while(Character.isDigit(datac[i])&&i<datac.length-1){
+            i++;
+        }
+        for(int j=anterior;j<=i;j++){
+            dia+=datac[j];
+        }
+        
+        if(Integer.parseInt(dia)<10){
+            String aux = dia;
+            dia="0";
+            dia+=aux;
+        }
+        
+        
+        dataCorrigida+=dia;
+        dataCorrigida+="/";
+        dataCorrigida+=mes;
+        dataCorrigida+="/";
+        dataCorrigida+=ano;
+        
+        return dataCorrigida;
     }
 
     public String retornaInfoPacienteGUI(String cartaoSus) {
@@ -414,7 +468,8 @@ public class PacienteDAO {
                 InfoPacienteGUI.txtCartaoSus.setText(rs.getString("cartao_sus"));
                 InfoPacienteGUI.txtNome.setText(rs.getString("nome"));
                 InfoPacienteGUI.txtCpf.setText(rs.getString("cpf"));
-                InfoPacienteGUI.txtDataNascimento.setText(rs.getString("nascimento"));
+                String data = rs.getString("nascimento");               
+                InfoPacienteGUI.txtDataNascimento.setText(corrigirData(data));
                 InfoPacienteGUI.cmbRaca.setSelectedItem(rs.getString("cor"));
                 InfoPacienteGUI.cmbDeficiencia.setSelectedItem(rs.getString("deficiencia"));
                 if (rs.getString("sexo").equals("Masculino")) {
