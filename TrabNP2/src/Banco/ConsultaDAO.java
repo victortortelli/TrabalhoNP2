@@ -5,6 +5,8 @@
  */
 package Banco;
 
+import GUI.DiagnosticoGUI;
+import GUI.FarmaciaGUI;
 import Objetos.Consulta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -71,12 +73,10 @@ public class ConsultaDAO {
         return null;
     }
 
-
-
     public void mostrarTudo() {
 
         String sql = "SELECT p.nome AS 'Nome', c.urgencia AS 'Urgência', c.id AS 'Nº da Consulta', c.cstatus AS 'Status' FROM pacientes p, consulta c WHERE p.cartao_sus = c.cartao_sus_pacientes;";
-       
+
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -110,7 +110,7 @@ public class ConsultaDAO {
 
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
-            ps.setDate(1, data);            
+            ps.setDate(1, data);
             ResultSet rs = ps.executeQuery();
             ListarConsultaGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
 
@@ -122,7 +122,7 @@ public class ConsultaDAO {
     public void mostrarHistoricoMedico(String crm) {
 
         String sql = "SELECT c.id AS 'Nº da Consulta',p.nome AS 'Nome', c.data AS 'Data', c.diagnostico AS 'Diagnóstico' FROM pacientes p, consulta c, medicos m WHERE p.cartao_sus = c.cartao_sus_pacientes AND c.crm_medico = m.crm AND m.crm = ? ORDER BY c.id DESC;";
-        
+
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
             ps.setString(1, crm);
@@ -137,26 +137,65 @@ public class ConsultaDAO {
     }
 
     public void buscarPeloCartaoSUSFarmacia(String cartaoSus) {
-        String sql = "SELECT p.nome AS 'Nome', c.data AS 'Data' FROM pacientes p, consulta c WHERE p.cartao_sus = ? AND p.cartao_sus = c.cartao_sus_pacientes AND c.cstatus = 0 ORDER BY c.id DESC;";
+        String sql = "SELECT p.nome AS 'Nome', c.data AS 'Data', c.diagnostico AS 'Diagnóstico' FROM pacientes p, consulta c WHERE p.cartao_sus = '" + cartaoSus + "' AND p.cartao_sus = c.cartao_sus_pacientes AND c.cstatus = 0 ORDER BY c.id DESC;";
 
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
-            ps.setString(1, cartaoSus);            
             ResultSet rs = ps.executeQuery();
-            ListarConsultaGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
+            rs.next();
+            System.out.println(rs.getString(3));
+            FarmaciaGUI.tblReceitas.setModel(DbUtils.resultSetToTableModel(rs));
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-    
-    public void melhorConsulta(){
-        String sql = "select c.id, p.nome,p.cartao_sus,p.nascimento,c.urgencia  from consulta c, pacientes p where c.cartao_sus_pacientes = p.cartao_sus AND c.cstatus = 2 order by c.id AND c.urgencia;";
+
+    public void melhorConsulta() {
+        String sql;
+        sql = "SELECT c.id, p.nome,p.cartao_sus,p.nascimento FROM consulta c, pacientes p "
+                + "WHERE c.cartao_sus_pacientes = p.cartao_sus AND c.cstatus = 2 "
+                + "ORDER BY c.id AND c.urgencia;";
+
         try {
-            PreparedStatement ps = this.getCon().prepareStatement(sql);                       
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            Paciente pp;
-            
+
+            rs.next();
+
+            DiagnosticoGUI.idConsulta = rs.getInt(1);
+            DiagnosticoGUI.txtNome.setText(rs.getString(2));
+            DiagnosticoGUI.txtCartaoSUS.setText(rs.getString(3));
+            DiagnosticoGUI.txtIdade.setText(rs.getString(4));
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+
+    }
+
+    public void finalizarConsulta(int id, String diagnostico, String receita) {
+        String sql = "UPDATE consulta SET cstatus=0, diagnostico= '" + diagnostico + "', receita = '" + receita + "' WHERE id = " + id + ";";
+
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void emAndamentoConsulta(int id, String crm) {
+        String sql = "UPDATE consulta SET cstatus=1, crm_medico='" + crm + "' WHERE id = ?;";
+
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+
+            ps.setInt(1, id);
+            ps.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

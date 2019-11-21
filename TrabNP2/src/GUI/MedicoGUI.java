@@ -229,19 +229,23 @@ public class MedicoGUI extends javax.swing.JFrame {
             Connection con = Conexao.abrirConexao();
             ConsultaDAO cd = new ConsultaDAO(con);
 
+            
+            
+            String nomeMedico = this.txtNomeMedico.getText();
+            String crm = this.txtCRM.getText();
+            String cpf = this.txtCPF.getText();
+            
+            DiagnosticoGUI telaDiagnostico = new DiagnosticoGUI(nomeMedico, crm,cpf);
+            
             cd.melhorConsulta();
 
-            if (MedicoGUI.paciente == null) {
+            if (DiagnosticoGUI.idConsulta==0) {
                 JOptionPane.showMessageDialog(this, "Não há consultas na fila para serem atendidas!");
                 Conexao.fecharConexao(con);
                 return;
             }
-            String nomeMedico = this.txtNomeMedico.getText();
-            String crm = this.txtCRM.getText();
-            int idConsulta = 1;
-            Paciente pp = new Paciente();
-            DiagnosticoGUI telaDiagnostico = new DiagnosticoGUI(nomeMedico, crm, pp, idConsulta);
-
+            
+            cd.emAndamentoConsulta(DiagnosticoGUI.idConsulta,crm);
             telaDiagnostico.setVisible(true);
             Conexao.fecharConexao(con);
             this.dispose();
