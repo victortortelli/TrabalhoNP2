@@ -17,6 +17,7 @@ import net.proteanit.sql.DbUtils;
 import Objetos.Paciente;
 import GUI.NovaConsultaGUI;
 import java.sql.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -137,14 +138,29 @@ public class ConsultaDAO {
     }
 
     public void buscarPeloCartaoSUSFarmacia(String cartaoSus) {
-        String sql = "SELECT p.nome AS 'Nome', c.data AS 'Data', c.diagnostico AS 'Diagnóstico' FROM pacientes p, consulta c WHERE p.cartao_sus = '" + cartaoSus + "' AND p.cartao_sus = c.cartao_sus_pacientes AND c.cstatus = 0 ORDER BY c.id DESC;";
+        String sql = "SELECT p.nome AS 'Nome', c.id AS 'Consulta Nº', c.data AS 'Data', c.diagnostico AS 'Diagnóstico' FROM pacientes p, consulta c WHERE p.cartao_sus = ? AND p.cartao_sus = c.cartao_sus_pacientes AND c.cstatus = 0 ORDER BY c.id DESC;";
 
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, cartaoSus);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            System.out.println(rs.getString(3));
             FarmaciaGUI.tblReceitas.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void mostrarReceitaFarmacia(int nConsulta) {
+        String sql = "SELECT c.receita FROM consulta c WHERE c.id = ?;";
+        try {
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, nConsulta);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next())         
+            JOptionPane.showMessageDialog(null, rs.getString("receita"));
+            
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
