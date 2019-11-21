@@ -12,6 +12,34 @@ import java.util.ArrayList;
 public class Paciente extends Pessoas{
 
     /**
+     * @return the naturalidade
+     */
+    public String getNaturalidade() {
+        return naturalidade;
+    }
+
+    /**
+     * @param naturalidade the naturalidade to set
+     */
+    public void setNaturalidade(String naturalidade) {
+        this.naturalidade = naturalidade;
+    }
+
+    /**
+     * @return the profissao
+     */
+    public String getProfissao() {
+        return profissao;
+    }
+
+    /**
+     * @param profissao the profissao to set
+     */
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
+    }
+
+    /**
      * @return the dificiencia
      */
     public String getDificiencia() {
@@ -185,6 +213,8 @@ public class Paciente extends Pessoas{
     private String cor;
     private String sexo;
     private ArrayList<Consulta> consultas;
+    private String naturalidade;
+    private String profissao;
     
     public void listarConsultas(){
         //fazer dps

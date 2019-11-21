@@ -180,7 +180,7 @@ public class FarmaciaGUI extends javax.swing.JFrame {
                 return;
             }
             cd.buscarPeloCartaoSUSFarmacia(txtCartaoSUS.getText());
-
+            
             Conexao.fecharConexao(con);
             JOptionPane.showMessageDialog(this, "Pesquisa concluida!");
 

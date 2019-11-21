@@ -6,6 +6,7 @@
 package Banco;
 
 import GUI.ListarUsuariosGUI;
+import GUI.InfoPacienteGUI;
 import Objetos.Paciente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,7 +31,7 @@ public class PacienteDAO {
     }
 
     public String insert(Paciente paciente) {
-        String sql = "INSERT INTO pacientes(cartao_sus,nome,cpf,nascimento,cor,deficiencia,sexo,rg,rua,bairro,numero,complemento,cidade,estado,ddd,telefone,escola) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO pacientes(cartao_sus,nome,cpf,nascimento,cor,deficiencia,sexo,rg,rua,bairro,numero,complemento,cidade,estado,ddd,telefone,escola,naturalidade,profissao) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
             ps.setString(1, paciente.getCartaoSUS());
@@ -50,7 +51,9 @@ public class PacienteDAO {
             ps.setString(15, paciente.getDdd());
             ps.setString(16, paciente.getTelefone());
             ps.setString(17, paciente.getEscola());
-
+            ps.setString(18, paciente.getNaturalidade());
+            ps.setString(19, paciente.getProfissao());
+            
             if (ps.executeUpdate() > 0) {
                 return "Dados inseridos com sucesso!";
             } else {
@@ -205,7 +208,6 @@ public class PacienteDAO {
             ps.setString(13, paciente.getEstado());
             ps.setString(14, paciente.getDdd());
             ps.setString(15, paciente.getTelefone());
-  
 
             if (ps.executeUpdate() > 0) {
                 return "Dados inseridos com sucesso!";
@@ -237,7 +239,6 @@ public class PacienteDAO {
             ps.setString(14, paciente.getDdd());
             ps.setString(15, paciente.getTelefone());
 
-
             if (ps.executeUpdate() > 0) {
                 return "Dados inseridos com sucesso!";
             } else {
@@ -266,7 +267,6 @@ public class PacienteDAO {
             ps.setString(12, paciente.getEstado());
             ps.setString(13, paciente.getDdd());
             ps.setString(14, paciente.getTelefone());
-
 
             if (ps.executeUpdate() > 0) {
                 return "Dados inseridos com sucesso!";
@@ -357,6 +357,7 @@ public class PacienteDAO {
         String sql = "SELECT nome AS 'Nome', rg AS 'RG', cartao_sus AS 'Nº Cartão SUS' FROM pacientes;";
         try {
             PreparedStatement ps = this.getCon().prepareStatement(sql);
+            System.out.println(sql);
             ResultSet rs = ps.executeQuery();
             ListarUsuariosGUI.tblResultados.setModel(DbUtils.resultSetToTableModel(rs));
 
@@ -366,4 +367,39 @@ public class PacienteDAO {
         }
     }
 
+    public String retornaInfoPacienteGUI(String cartaoSus) {
+        try {
+            String sql = "SELECT * FROM pacientes WHERE cartao_sus = ?;";
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, cartaoSus);
+            ResultSet rs;
+            rs = ps.executeQuery(); //EXECUTA A LINHA DO SQL E PEGA OS RESULTADOS
+
+            //PEGA OS DADOS QUE FORAM RETORNADOS PELA TABELA
+            if (rs.next()) {
+
+                InfoPacienteGUI.txtCartaoSus.setText(rs.getString("cartao_sus"));
+                InfoPacienteGUI.txtNome.setText(rs.getString("nome"));
+                InfoPacienteGUI.txtCpf.setText(rs.getString("cpf"));
+                InfoPacienteGUI.txtDataNascimento.setText(rs.getString("nascimento"));
+                InfoPacienteGUI.txtRaca.setText(rs.getString("cor"));
+                InfoPacienteGUI.txtDeficiencia.setText(rs.getString("deficiencia"));
+                InfoPacienteGUI.txtSexo.setText(rs.getString("sexo"));
+                InfoPacienteGUI.txtRg.setText(rs.getString("rg"));
+                InfoPacienteGUI.txtRua.setText(rs.getString("rua"));
+                InfoPacienteGUI.txtBairro.setText(rs.getString("bairro"));
+                InfoPacienteGUI.txtNumero.setText(rs.getString("numero"));
+                InfoPacienteGUI.txtComplemento.setText(rs.getString("complemento"));
+                InfoPacienteGUI.txtCidade.setText(rs.getString("cidade"));
+                InfoPacienteGUI.txtEstado.setText(rs.getString("estado"));
+                InfoPacienteGUI.txtTelefone.setText(rs.getString("rg") + rs.getString("telefone"));
+                InfoPacienteGUI.txtEscola.setText(rs.getString("escola"));
+
+            }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+        return null;
+
+    }
 }

@@ -41,11 +41,13 @@
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
               <Component id="btnVoltar" min="-2" pref="150" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
               <Component id="btnNovaConsulta" min="-2" pref="150" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="btnConsultarDados" min="-2" pref="134" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,9 +61,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="panelResultados" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnVoltar" min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="btnNovaConsulta" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnVoltar" pref="38" max="32767" attributes="0"/>
+                  <Component id="btnConsultarDados" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnNovaConsulta" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -243,6 +246,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="LISTAR PACIENTES"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnConsultarDados">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Consultar Dados"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsultarDadosActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

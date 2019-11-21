@@ -26,7 +26,9 @@ cidade varchar(100) not null,
 estado varchar(2) not null,
 ddd varchar(6) not null,
 telefone varchar(20) not null,
-escola varchar(140));
+escola varchar(140),
+naturalidade varchar (30) not null,
+profissao varchar (30) not null);
 
 create table medicos(
 crm varchar(16) primary key,
