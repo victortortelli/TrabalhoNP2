@@ -82,15 +82,10 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="panelEndereco" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="panelDadosPessoais" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="panelEndereco" alignment="0" max="32767" attributes="0"/>
+                  <Component id="panelDadosPessoais" alignment="1" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -516,7 +511,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtDataNascimentoMouseClicked"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="//try{&#xa;//javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xa;//this.txtDataNascimento = new javax.swing.JFormattedTextField(mascaraData);&#xa;//}&#xa;//catch (Exception e){&#xa;//}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="/*try{&#xa;javax.swing.text.MaskFormatter mascaraData= new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xa;this.txtDataNascimento = new javax.swing.JFormattedTextField(mascaraData);&#xa;}&#xa;catch (Exception e){&#xa;}*/"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
