@@ -66,6 +66,7 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         btnNovaConsulta = new javax.swing.JButton();
         lblListarUsuario = new javax.swing.JLabel();
+        btnConsultarDados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -172,6 +173,13 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
         lblListarUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblListarUsuario.setText("LISTAR PACIENTES");
 
+        btnConsultarDados.setText("Consultar Dados");
+        btnConsultarDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarDadosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,11 +197,13 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
                         .addGap(0, 296, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(113, 113, 113)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(114, 114, 114)
+                .addGap(49, 49, 49)
                 .addComponent(btnNovaConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(198, 198, 198))
+                .addGap(50, 50, 50)
+                .addComponent(btnConsultarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,8 +215,9 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelResultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(btnConsultarDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNovaConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -242,7 +253,7 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnNovaConsultaActionPerformed
 
-   
+
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
 
         try {
@@ -265,7 +276,7 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
             }
 
             Conexao.fecharConexao(con);
-            
+
             JOptionPane.showMessageDialog(this, "Pesquisa concluída!");
 
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
@@ -275,6 +286,32 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
         this.txtCartaoSUS.setText("");
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnConsultarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarDadosActionPerformed
+        InfoPacienteGUI telaInfoPaciente;
+        telaInfoPaciente = new InfoPacienteGUI();
+        String cartaoSusSelecionado;
+
+        try {
+
+            Connection con = Conexao.abrirConexao();
+            PacienteDAO pd = new PacienteDAO(con);
+
+            int linha;
+
+            linha = tblResultados.getSelectedRow();
+            cartaoSusSelecionado = tblResultados.getValueAt(linha, 2).toString();
+
+            pd.retornaInfoPacienteGUI(cartaoSusSelecionado);
+
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
+            cartaoSusSelecionado = "";
+        }
+
+        telaInfoPaciente.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_btnConsultarDadosActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -309,6 +346,7 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultarDados;
     private javax.swing.JButton btnNovaConsulta;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnVoltar;

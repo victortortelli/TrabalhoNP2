@@ -21,37 +21,14 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
     /**
      * Creates new form Tela_Secretaria
      */
-    private void limparCampos() {
-        String empty = "";
-
-        this.txtBairro.setText(empty);
-        this.txtCartaoSus.setText(empty);
-        this.txtCidade.setText(empty);
-        this.txtComplemento.setText(empty);
-        this.txtCpf.setText(empty);
-        this.txtDataNascimento.setText(empty);
-        this.txtEscola.setText(empty);
-        this.cmbEstado.setSelectedIndex(0);
-        this.cmbDeficiencia.setSelectedIndex(0);
-        this.cmbRaca.setSelectedIndex(0);
-        this.txtNaturalidade.setText(empty);
-        this.txtNome.setText(empty);
-        this.txtNumero.setText(empty);
-        this.txtProfissao.setText(empty);
-        this.txtRg.setText(empty);
-        this.txtRua.setText(empty);
-        this.txtTelefone.setText(empty);
-    }
 
     public InfoPacienteGUI() {
 
         initComponents();
-        this.setLocationRelativeTo(null);
-
-        this.limparCampos();
-
+        this.setLocationRelativeTo(null);       
+        
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -376,6 +353,11 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         jLabel5.setText("INFORMAÇÕES DO PACIENTE");
 
         jCheckBox1.setText("Alterar Informações?");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -477,15 +459,15 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
         return 0;
     }
 
-    private String SelecionaSexo() {
-        String sexo = "";
-        if (radioMasculino.isSelected()) {
-            sexo = radioMasculino.getText();
-        } else if (radioFeminino.isSelected()) {
-            sexo = radioFeminino.getText();
-        }
-        return sexo;
-    }
+//    private String SelecionaSexo() {
+//        String sexo = "";
+//        if (radioMasculino.isSelected()) {
+//            sexo = radioMasculino.getText();
+//        } else if (radioFeminino.isSelected()) {
+//            sexo = radioFeminino.getText();
+//        }
+//        return sexo;
+//    }
 
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -504,11 +486,11 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                 java.sql.Date sqlDate = java.sql.Date.valueOf(textFieldAsDate);
                 //Fim
 
-                //Cria uma string com a opção marcada dentro da combobox
-                String uf = (String) cmbEstado.getSelectedItem();
-                String deficiencia = (String) cmbDeficiencia.getSelectedItem();
-                String cor = (String) cmbRaca.getSelectedItem();
-                //fim
+//                //Cria uma string com a opção marcada dentro da combobox
+//                String uf = (String) cmbEstado.getSelectedItem();
+//                String deficiencia = (String) cmbDeficiencia.getSelectedItem();
+//                String cor = (String) cmbRaca.getSelectedItem();
+//                //fim
 
                 pb.setNome(txtNome.getText());
                 pb.setCartaoSUS(txtCartaoSus.getText());
@@ -522,10 +504,10 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
                 pb.setNumero(txtNumero.getText());
                 pb.setTelefone(txtTelefone.getText());
                 pb.setEscola(txtEscola.getText());
-                pb.setEstado(uf);
-                pb.setDificiencia(deficiencia);
-                pb.setCor(cor);
-                pb.setSexo(SelecionaSexo());
+//                pb.setEstado(uf);
+//                pb.setDificiencia(deficiencia);
+//                pb.setCor(cor);
+//                pb.setSexo(SelecionaSexo());
 
                 //Criando uma string com apenas o DDD e setando no banco
                 String ddd = "";
@@ -581,6 +563,10 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
     private void txtCartaoSusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCartaoSusMouseClicked
         txtCartaoSus.setCaretPosition(0);
     }//GEN-LAST:event_txtCartaoSusMouseClicked
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -651,23 +637,23 @@ public class InfoPacienteGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblTelefone;
     private javax.swing.JPanel panelDadosPessoais;
     private javax.swing.JPanel panelEndereco;
-    private javax.swing.JTextField txtBairro;
-    private javax.swing.JFormattedTextField txtCartaoSus;
-    private javax.swing.JTextField txtCidade;
-    private javax.swing.JTextField txtComplemento;
-    private javax.swing.JFormattedTextField txtCpf;
-    private javax.swing.JFormattedTextField txtDataNascimento;
-    private javax.swing.JTextField txtDeficiencia;
-    private javax.swing.JTextField txtEscola;
-    private javax.swing.JTextField txtEstado;
-    private javax.swing.JTextField txtNaturalidade;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtNumero;
-    private javax.swing.JTextField txtProfissao;
-    private javax.swing.JTextField txtRaca;
-    private javax.swing.JTextField txtRg;
-    private javax.swing.JTextField txtRua;
-    private javax.swing.JTextField txtSexo;
-    private javax.swing.JFormattedTextField txtTelefone;
+    public static javax.swing.JTextField txtBairro;
+    public static javax.swing.JFormattedTextField txtCartaoSus;
+    public static javax.swing.JTextField txtCidade;
+    public static javax.swing.JTextField txtComplemento;
+    public static javax.swing.JFormattedTextField txtCpf;
+    public static javax.swing.JFormattedTextField txtDataNascimento;
+    public static javax.swing.JTextField txtDeficiencia;
+    public static javax.swing.JTextField txtEscola;
+    public static javax.swing.JTextField txtEstado;
+    public static javax.swing.JTextField txtNaturalidade;
+    public static javax.swing.JTextField txtNome;
+    public static javax.swing.JTextField txtNumero;
+    public static javax.swing.JTextField txtProfissao;
+    public static javax.swing.JTextField txtRaca;
+    public static javax.swing.JTextField txtRg;
+    public static javax.swing.JTextField txtRua;
+    public static javax.swing.JTextField txtSexo;
+    public static javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

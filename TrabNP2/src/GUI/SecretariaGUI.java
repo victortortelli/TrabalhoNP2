@@ -8,8 +8,6 @@ package GUI;
 import Banco.Conexao;
 import Banco.ProfissionaisDAO;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -36,7 +34,7 @@ public class SecretariaGUI extends javax.swing.JFrame {
         }     
         
         this.txtCPF.setText(cpf);
-    }
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
