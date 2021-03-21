@@ -305,7 +305,7 @@ public class CadastroGUI extends javax.swing.JFrame {
         panelDadosPessoaisLayout.setHorizontalGroup(
             panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosPessoaisLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(87, Short.MAX_VALUE)
                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNaturalidade, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblDataNascimento, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -422,26 +422,26 @@ public class CadastroGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(btnLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelDadosPessoais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(366, 366, 366)
                 .addComponent(jLabel5)
-                .addGap(264, 264, 264))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(btnLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 708, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -529,21 +529,21 @@ public class CadastroGUI extends javax.swing.JFrame {
 
     private int confereCampos() {
 
-        if (txtCpf.getText().isBlank() == false && txtComplemento.getText().isBlank() == false && txtEscola.getText().isBlank() == false) {
+        if (txtCpf.getText().isEmpty() == false && txtComplemento.getText().isEmpty() == false && txtEscola.getText().isEmpty() == false) {
             return 1;
-        } else if (txtCpf.getText().isBlank() == true && txtComplemento.getText().isBlank() == false && txtEscola.getText().isBlank() == false) {
+        } else if (txtCpf.getText().isEmpty() == true && txtComplemento.getText().isEmpty() == false && txtEscola.getText().isEmpty() == false) {
             return 2;
-        } else if (txtCpf.getText().isBlank() == false && txtComplemento.getText().isBlank() == true && txtEscola.getText().isBlank() == false) {
+        } else if (txtCpf.getText().isEmpty() == false && txtComplemento.getText().isEmpty() == true && txtEscola.getText().isEmpty() == false) {
             return 3;
-        } else if (txtCpf.getText().isBlank() == false && txtComplemento.getText().isBlank() == false && txtEscola.getText().isBlank() == true) {
+        } else if (txtCpf.getText().isEmpty() == false && txtComplemento.getText().isEmpty() == false && txtEscola.getText().isEmpty() == true) {
             return 4;
-        } else if (txtCpf.getText().isBlank() == true && txtComplemento.getText().isBlank() == true && txtEscola.getText().isBlank() == false) {
+        } else if (txtCpf.getText().isEmpty() == true && txtComplemento.getText().isEmpty() == true && txtEscola.getText().isEmpty() == false) {
             return 5;
-        } else if (txtCpf.getText().isBlank() == true && txtComplemento.getText().isBlank() == false && txtEscola.getText().isBlank() == true) {
+        } else if (txtCpf.getText().isEmpty() == true && txtComplemento.getText().isEmpty() == false && txtEscola.getText().isEmpty() == true) {
             return 6;
-        } else if (txtCpf.getText().isBlank() == false && txtComplemento.getText().isBlank() == true && txtEscola.getText().isBlank() == true) {
+        } else if (txtCpf.getText().isEmpty() == false && txtComplemento.getText().isEmpty() == true && txtEscola.getText().isEmpty() == true) {
             return 7;
-        } else if (txtCpf.getText().isBlank() == true && txtComplemento.getText().isBlank() == true && txtEscola.getText().isBlank() == true) {
+        } else if (txtCpf.getText().isEmpty() == true && txtComplemento.getText().isEmpty() == true && txtEscola.getText().isEmpty() == true) {
             return 8;
         }
 

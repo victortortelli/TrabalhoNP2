@@ -261,13 +261,13 @@ public class ListarUsuariosGUI extends javax.swing.JFrame {
             Paciente pp = new Paciente();
             PacienteDAO pd = new PacienteDAO(con);
 
-            if (!this.txtCartaoSUS.getText().isBlank()) {
+            if (!this.txtCartaoSUS.getText().isEmpty()) {
                 pd.buscarPeloCartaoSUS(pp, this.txtCartaoSUS.getText());
             } else {
-                if (!this.txtNome.getText().isBlank()) {
+                if (!this.txtNome.getText().isEmpty()) {
                     pd.buscarPeloNome(pp, this.txtNome.getText());
                 } else {
-                    if (!this.txtRG.getText().isBlank()) {
+                    if (!this.txtRG.getText().isEmpty()) {
                         pd.buscarPeloRg(pp, this.txtRG.getText());
                     } else {
                         pd.mostrarTodos(pp);

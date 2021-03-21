@@ -30,6 +30,26 @@ escola varchar(140),
 naturalidade varchar (30) not null,
 profissao varchar (30) not null);
 
+insert into pacientes values ('123 1298 9934 1234',
+'Victor',
+'374.512.321-79',
+'1996-09-02',
+'Branca',
+'NA',
+'Masculino',
+'555004806',
+'Rua Um dois tres',
+'Centro',
+'11',
+'NA',
+'Campinas',
+'SP',
+'19',
+'998297632',
+'UNIP',
+'Campinas',
+'Estudante');
+
 create table medicos(
 crm varchar(16) primary key,
 id_profissionais int not null,
@@ -62,6 +82,7 @@ grant select,insert,update,delete on trabalhoNp2.* to pupo@localhost;
 CREATE USER 'ed'@'localhost' IDENTIFIED BY 'willy';
 grant select,insert,update,delete on trabalhoNp2.* to ed@localhost;
 
+
 CREATE USER 'vitao'@'localhost' IDENTIFIED BY 'victor';
 grant select on trabalhoNp2.* to vitao@localhost;
 
@@ -70,7 +91,7 @@ grant select on trabalhoNp2.* to vitao@localhost;
  
  UPDATE pacientes SET nome = 'Guilherme', nascimento = '1996-9-2' WHERE cartao_sus = '616 1616 5151 3212';
  
- 
+
 
 -- insert into teste values (CURDATE(), CURTIME(), NOW());
 
